@@ -43,12 +43,6 @@ contract Authentication is Ownable {
     _;
   }
 
-  modifier onlyValidRole(uint256 _roleValue) {
-    require(_roleValue != 0);
-    require(uint256(Role.ORGANIZATION) >= _roleValue);
-    _;
-  }
-
   modifier onlyOrganization (address _organizationAddress) {
     require(_organizationAddress != address(0));
     require(users[_organizationAddress].role == Role.ORGANIZATION);
@@ -61,77 +55,35 @@ contract Authentication is Ownable {
     require(memberOf[_userAddress] == address(0));
     _;
   }
-  
-  /** @dev Login form.
-  * @dev Using modifiers: 
-  * isUser (only an existing User can access this function)
-  */
-  function login() public view isUser(msg.sender)
-    returns(
-      uint256,
-      bytes32,
-      bytes32[3],
-      address[],
-      address[]
-    )
-    {
-      User memory user = users[msg.sender];
-        
-      return (
-        uint256(user.role),
-        user.name,
-        user.socialMedia,
-        user.posts,
-        user.members
-      );
-  }
 
-  function signup(uint256 _roleValue, bytes32 _name)
-    public
-    notSignedUp
-    onlyValidRole(_roleValue)
-    returns(
-      uint256,
-      bytes32,
-      bytes32[3],
-      address[],
-      address[]
-    )
-    {
-      if (_roleValue == uint256(Role.ORGANIZATION)) {
-        require(_name != 0x0);
-      }
-
-      uint256 userId = usersArray.push(msg.sender) - 1;
-      usersIndex[msg.sender] = userId;
-      
-      User storage user = users[msg.sender];
-      user.role = Role(_roleValue);
-      user.name = _name;
+  function signup(uint256 _roleValue, bytes32 _name) public notSignedUp returns(uint256, bytes32, bytes32[3], address[], address[]) {
+    require(_roleValue != 0);
     
-      return (
-        uint256(user.role),
-        user.name,
-        user.socialMedia,
-        user.posts,
-        user.members
-      );
-      
-      emit OnSignup(msg.sender, uint256(user.role));
+    if (_roleValue == uint256(Role.ORGANIZATION)) {
+      require(_name != 0x0);
+    }
+
+    uint256 userId = usersArray.push(msg.sender) - 1;
+    usersIndex[msg.sender] = userId;
+    
+    User storage user = users[msg.sender];
+    user.role = Role(_roleValue);
+    user.name = _name;
+  
+    emit OnSignup(msg.sender, uint256(user.role));
+  
+    /*
+    return (
+      uint256(user.role),
+      user.name,
+      user.socialMedia,
+      user.posts,
+      user.members
+    );
+    */
   }
   
-  function getProfile(address _userAddress)
-    public
-    view
-    isUser(_userAddress) 
-    returns(
-      uint256,
-      bytes32,
-      bytes32[3],
-      address[],
-      address[]
-    )
-    {
+  function getProfile(address _userAddress) public view isUser(_userAddress) returns(uint256, bytes32, bytes32[3], address[], address[]) {
     User memory user = users[msg.sender];
     
     return(
@@ -142,6 +94,11 @@ contract Authentication is Ownable {
       user.members
     );
   }
+
+  function getMembersLength(address _organizationAddress) public view returns (uint) {
+    require(users[_organizationAddress].role == Role.ORGANIZATION);
+    return users[_organizationAddress].members.length;
+  }
   
   function deleteAccount() public {
     _deleteAccount(msg.sender, msg.sender);
@@ -151,22 +108,15 @@ contract Authentication is Ownable {
     _deleteAccount(_userAddress, msg.sender);
   }
   
-  function addMember(address _userAddress) public onlyOrganization(msg.sender) { 
+  function addMember(address _userAddress) public { 
     _addMember(msg.sender, _userAddress, msg.sender);
   }
   
-  function proxyAddMember(
-    address _organizationAddress,
-    address _userAddress
-  )
-    public
-    onlyOwner
-    onlyOrganization(_organizationAddress)
-  {
+  function proxyAddMember(address _organizationAddress, address _userAddress) public  onlyOwner {
     _addMember(_organizationAddress, _userAddress, msg.sender);
   }
   
-  function removeMember(address _userAddress) public onlyOrganization(msg.sender) {
+  function removeMember(address _userAddress) public {
     _removeMember(msg.sender, _userAddress, msg.sender);
   }
   
@@ -184,7 +134,7 @@ contract Authentication is Ownable {
   
   function setRole(uint256 _roleValue) public {
     _setRole(msg.sender, _roleValue, msg.sender);
-  
+  }
   
   function proxySetRole(address _userAddress, uint256 _roleValue) public onlyOwner {
     _setRole(_userAddress, _roleValue, msg.sender);
@@ -194,65 +144,42 @@ contract Authentication is Ownable {
     _setSocialMedia(msg.sender, _socialMediaIndex, _newSocialMedia, msg.sender);
   }
   
-  function proxySetSocialMedia(
-    address _userAddress,
-    uint256 _socialMediaIndex,
-    bytes32 _newSocialMedia1
-  )
-    public
-    onlyOwner
-  {
+  function proxySetSocialMedia(address _userAddress, uint256 _socialMediaIndex, bytes32 _newSocialMedia1) public onlyOwner {
     _setSocialMedia(_userAddress, _socialMediaIndex, _newSocialMedia1, msg.sender);
   }
   
   /* privates */
   function _deleteAccount(address _userAddress, address _caller) private isUser(_userAddress) {
-    uint256 userId = usersIndex[msg.sender];
+    uint256 userId = usersIndex[_userAddress];
     delete usersArray[userId];
     emit OnDeleteAccount(_userAddress, _caller);
   }
     
-  function _addMember(
-    address _organizationAddress,
-    address _userAddress,
-    address _caller
-  )
-    private
-    addressNotMember(_userAddress)
-  {
+  function _addMember(address _organizationAddress, address _userAddress, address _caller) private addressNotMember(_userAddress) {
+    require(users[_organizationAddress].role == Role.ORGANIZATION);
     memberOf[_userAddress] = _organizationAddress;
     uint256 memberId = users[_organizationAddress].members.push(_userAddress) - 1;
     membersIndex[_userAddress] = memberId;
     emit OnAddMember(_organizationAddress, _userAddress, _caller);
   }
     
-  function _removeMember(
-    address _organizationAddress,
-    address _userAddress,
-    address _caller
-  )
-    private
-  {
+  function _removeMember(address _organizationAddress, address _userAddress, address _caller) private {
+    require(users[_organizationAddress].role == Role.ORGANIZATION);
     require(users[_organizationAddress].members.length > 0);
-    require(memberOf[_userAddress] != address(0));
+    require(memberOf[_userAddress] == _organizationAddress);
+    memberOf[_userAddress] = 0x0;
 
     for (uint256 i = membersIndex[_userAddress]; i < users[_organizationAddress].members.length.sub(1); i = i.add(1)) {
       users[_organizationAddress].members[i] = users[msg.sender].members[i.add(1)];
     }
 
     users[_organizationAddress].members.length = users[_organizationAddress].members.length.sub(1);
-    
+    delete membersIndex[_userAddress];
+
     emit OnRemoveMember(_organizationAddress, _userAddress, _caller);
   }
   
-  function _setName(
-    address _userAddress,
-    bytes32 _newName,
-    address _caller
-  )
-    private
-    isUser(_userAddress)
-  {
+  function _setName(address _userAddress, bytes32 _newName, address _caller) private isUser(_userAddress) {
     if (users[_userAddress].role == Role.ORGANIZATION) {
       require(_newName != 0x0);
     }
@@ -261,15 +188,13 @@ contract Authentication is Ownable {
     emit OnSetName(_userAddress, users[_userAddress].name, _caller);
   }
   
-  function _setRole(
-    address _userAddress,
-    uint256 _roleValue,
-    address _caller
-  )
-    private
-    isUser(_userAddress)
-    onlyValidRole(_roleValue)
-  {
+  function _setRole(address _userAddress, uint256 _roleValue, address _caller) private isUser(_userAddress) {
+    require(_roleValue != 0);
+
+    if (_roleValue == uint256(Role.ORGANIZATION)) {
+      require(users[_userAddress].name != 0x0);
+    }
+    
     users[_userAddress].role = Role(_roleValue);
     emit OnSetRole(_userAddress, uint256(users[_userAddress].role), _caller);
   }

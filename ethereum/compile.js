@@ -9,14 +9,13 @@ const buildPath = path.resolve(__dirname, 'build');
 fs.removeSync(buildPath);
 
 // read 'Campaign.sol' from the folder 'contracts'
-const postPath = path.resolve(__dirname, 'contracts', 'Post.sol');
+const tempFactoryPath = path.resolve(__dirname, 'contracts', 'TempFactory.sol');
 
 // read input code from that file
-const input = fs.readFileSync(postPath, 'utf8');
+const input = fs.readFileSync(tempFactoryPath, 'utf8');
 
 // compile the file. get the contracts property of the  file.
 const output = solc.compile(input, 1).contracts;
-console.log(output);
 
 // create 'build' folder
 fs.ensureDirSync(buildPath);
