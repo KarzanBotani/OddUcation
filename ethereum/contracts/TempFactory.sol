@@ -1,26 +1,5 @@
 pragma solidity ^0.4.21;
 
-contract Ownable {
-  address public owner;
-
-  event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
-
-  function Ownable() public {
-    owner = msg.sender;
-  }
-
-  modifier onlyOwner() {
-    require(msg.sender == owner);
-    _;
-  }
-
-  function transferOwnership(address newOwner) public onlyOwner {
-    require(newOwner != address(0));
-    emit OwnershipTransferred(owner, newOwner);
-    owner = newOwner;
-  }
-}
-
 library SafeMath {
 
   function mul(uint256 a, uint256 b) internal pure returns (uint256) {
@@ -51,7 +30,41 @@ library SafeMath {
   }
 }
 
-contract Authentication is Ownable {
+contract Ownable {
+  address public owner;
+
+  event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+
+  function Ownable() public {
+    owner = msg.sender;
+  }
+
+  modifier onlyOwner() {
+    require(msg.sender == owner);
+    _;
+  }
+
+  function transferOwnership(address newOwner) public onlyOwner {
+    require(newOwner != address(0));
+    emit OwnershipTransferred(owner, newOwner);
+    owner = newOwner;
+  }
+}
+
+contract Destructible is Ownable {
+
+  function Destructible() public payable { }
+
+  function destroy() onlyOwner public {
+    selfdestruct(owner);
+  }
+
+  function destroyAndSend(address _recipient) onlyOwner public {
+    selfdestruct(_recipient);
+  }
+}
+
+contract Authentication is Destructible {
   using SafeMath for uint256;
 
   enum Role { NONE, REGULAR, ORGANIZATION }
@@ -321,7 +334,7 @@ contract Factory is Authentication {
   
 }
 
-contract Post is Ownable {
+contract Post is Destructible {
   using SafeMath for uint256;
     
   enum PaymentOption { REGULAR, ORGANIZATION }

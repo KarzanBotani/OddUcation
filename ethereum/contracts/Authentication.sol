@@ -1,10 +1,11 @@
 pragma solidity ^0.4.21;
 
 import "./zeppelin-solidity/Ownable.sol";
+import "./zeppelin-solidity/Destructible.sol";
 import "./zeppelin-solidity/SafeMath.sol";
 
 
-contract Authentication is Ownable {
+contract Authentication is Destructible {
   using SafeMath for uint256;
 
   enum Role { NONE, REGULAR, ORGANIZATION }

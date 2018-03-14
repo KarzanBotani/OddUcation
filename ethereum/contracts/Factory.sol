@@ -1,7 +1,7 @@
 pragma solidity ^0.4.21;
 
 import "./Authentication.sol";
-import "./zeppelin-solidity/Ownable.sol";
+import "./zeppelin-solidity/Destructible.sol";
 import "./zeppelin-solidity/SafeMath.sol";
 
 contract Factory is Authentication {
@@ -64,7 +64,7 @@ contract Factory is Authentication {
   
 }
 
-contract Post is Ownable {
+contract Post is Destructible {
   using SafeMath for uint256;
     
   enum PaymentOption { REGULAR, ORGANIZATION }
