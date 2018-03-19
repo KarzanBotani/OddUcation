@@ -1,6 +1,5 @@
 pragma solidity ^0.4.21;
 
-import "./zeppelin-solidity/Ownable.sol";
 import "./zeppelin-solidity/Destructible.sol";
 import "./zeppelin-solidity/SafeMath.sol";
 
