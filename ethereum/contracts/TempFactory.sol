@@ -131,20 +131,10 @@ contract Authentication is Destructible {
     user.name = _name;
   
     emit OnSignup(msg.sender, uint256(user.role));
-  
-    /*
-    return (
-      uint256(user.role),
-      user.name,
-      user.socialMedia,
-      user.posts,
-      user.members
-    );
-    */
   }
   
   function getProfile(address _userAddress) public view isUser(_userAddress) returns(uint256, bytes32, bytes32[3], address[], address[]) {
-    User memory user = users[msg.sender];
+    User memory user = users[_userAddress];
     
     return(
       uint256(user.role),
@@ -153,6 +143,13 @@ contract Authentication is Destructible {
       user.posts,
       user.members
     );
+  }
+
+  function getMembers(address _organizationAddress) public view returns (address[]) {
+    require(users[_organizationAddress].role == Role.ORGANIZATION);
+    User memory user = users[_organizationAddress];
+    
+    return user.members;
   }
 
   function getMembersLength(address _organizationAddress) public view returns (uint) {

@@ -1,7 +1,7 @@
 // You need 'Component' when it is a class based component
 import React, { Component } from "react";
 import { Button, Form, Input, Message } from "semantic-ui-react";
-import Layout from "../../components/Layout";
+import Layout from "../../components/general/Layout";
 import factory from '../../ethereum/factory'; // import factory instance
 import web3 from '../../ethereum/web3';
 import { Link, Router } from '../../routes'; // Link = react component for <a> tags - navigation. Router = redirect from one page to another
@@ -54,7 +54,7 @@ class PostNew extends Component {
 
       Router.pushRoute('/');
     } catch (err) {
-      this.setState({ errorMessage: 'wooooooooooops' });
+      this.setState({ errorMessage: err.message });
     }
 
     this.setState({ loading: false });

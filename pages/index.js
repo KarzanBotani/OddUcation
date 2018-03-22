@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Card, Button } from 'semantic-ui-react';
 import factory from '../ethereum/factory'; // import factory instance
-import Layout from '../components/Layout';
+import Post from '../ethereum/post';
+import Layout from '../components/general/Layout';
 import { Link } from '../routes';
 
 // class components allow you to use lifecycle components like: componentDidMount
@@ -13,13 +14,13 @@ class PostIndex extends Component {
   // by doing this, 'posts' can be referenced anywhere, because it is now a 'prop'
   static async getInitialProps() {
     const posts = await factory.methods.getDeployedPosts().call();
-    
-    // return { posts: posts };
+
     return { posts };
   }
 
   renderPosts() {
     const items = this.props.posts.map(address => {
+
       return {
         header: address,
         description: (
@@ -40,7 +41,7 @@ class PostIndex extends Component {
         <div>
           <h3>Latest Posts:</h3>
           <Link route="/posts/new">
-            <a>
+            <a className="item">
               <Button floated="right" content="Create Post" icon="add circle" primary />
             </a>
           </Link>
