@@ -209,6 +209,15 @@ contract Authentication is Destructible {
   function _deleteAccount(address _userAddress, address _caller) private isUser(_userAddress) {
     uint256 userId = usersIndex[_userAddress];
     delete usersArray[userId];
+
+    users[_userAddress].role = Role.NONE;
+    users[_userAddress].name = 0x0;
+    users[_userAddress].socialMedia[0] = 0x0;
+    users[_userAddress].socialMedia[1] = 0x0;
+    users[_userAddress].socialMedia[2] = 0x0;
+    users[_userAddress].posts.length = 0;
+    users[_userAddress].members.length = 0;
+
     emit OnDeleteAccount(_userAddress, _caller);
   }
     

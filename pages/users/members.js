@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Card, Form, Grid, Input, Message, Table } from 'semantic-ui-react';
+import { Button, Card, Form, Grid, Input, Message, Table, Icon } from 'semantic-ui-react';
 import Layout from "../../components/general/Layout";
 import factory from '../../ethereum/factory'; // import factory instance
 import web3 from '../../ethereum/web3';
@@ -16,13 +16,16 @@ class ShowMembers extends Component {
     name: '',
     role: '',
     organizationMembersCount: '0',
-    organizationMembers: '',
-    posts: '',
+    organizationMembers: [],
+    posts: [],
     userPostsCount: '0',
     socialMedia1: '',
     socialMedia2: '',
     socialMedia3: '',
-    addressToAdd: ''
+    addressToAdd: '',
+    addressToRemove: '',
+    memberInfo: [],
+    memberIdsLength: ''
   }
 
   async componentDidMount() {
@@ -32,9 +35,6 @@ class ShowMembers extends Component {
       const profileSummary = await factory.methods.getProfile(accounts[0]).call();
       const userPostsCount = await factory.methods.userPostsCount(accounts[0]).call();
 
-      this.setState({ userAddress: accounts[0] });
-      this.setState({ balance: balance });
-
       if (profileSummary[0] === '1') {
         this.setState({ role: 'Regular'});
       }
@@ -42,10 +42,11 @@ class ShowMembers extends Component {
       else if (profileSummary[0] === '2') {
         this.setState({ role: 'Organization' });
         this.setState({ organizationMembers: profileSummary[4] });
-        console.log(this.state.organizationMembers);
-        console.log(typeof this.state.organizationMembers);
         this.setState({ organizationMembersCount: profileSummary[4].length });
       }
+
+      this.setState({ userAddress: accounts[0] });
+      this.setState({ balance: balance });
 
       this.setState({ name: web3.utils.hexToUtf8(profileSummary[1]) });
       this.setState({ socialMedia1: web3.utils.hexToUtf8(profileSummary[2][0]) });
@@ -53,6 +54,21 @@ class ShowMembers extends Component {
       this.setState({ socialMedia3: web3.utils.hexToUtf8(profileSummary[2][2]) });
       this.setState({ posts: profileSummary[3] });
       this.setState({ userPostsCount: userPostsCount });
+
+      let memberIds = [];      
+      let memberProfiles = [];
+
+      for (let member of this.state.organizationMembers) {
+        let g = await factory.methods.getProfile(member).call();
+        memberIds.push(member);
+        memberProfiles.push(g);
+      }
+
+      await this.setState({
+        memberInfo: { memberIds, memberProfiles }
+      });
+
+      await this.setState({ memberIdsLength: memberIds.length });
     } catch (err) {
       console.log(err)
     }
@@ -76,30 +92,74 @@ class ShowMembers extends Component {
     );
   }
 
-  renderMembers() {
-    const { Header, Row, HeaderCell, Body, Cell } = Table;
+  onDeleteAccount = async (event) => {
+    this.setState({ loading: true, errorMessage: '' });
+    event.preventDefault();
 
-    
-    for (let value in this.state.organizationMembers) {
-      console.log(value);
+    try {
+      const accounts = await web3.eth.getAccounts();
+      let g = await factory.methods.deleteAccount().send({ from: accounts[0] });
+
+      console.log('g: ', g);
+
+      Router.pushRoute('/');
+    } catch (err) {
+      console.log('err: ', err);
     }
 
-    // return this.state.organizationMembers.map((mem, index) => {
-    //   return (
-    //     <Row>
-    //       <Cell>index {index}</Cell>
-    //       <Cell>mem {mem}</Cell>
-    //     </Row>
-    //   );
-    // });
+    this.setState({ loading: false });
+  }
 
-    // for (let value of this.state.organizationMembers) {
-    //   return (
-    //     <Row>
-    //       <Cell>{value}</Cell>
-    //     </Row>
-    //   );
-    // }
+  onRemoveMember = async (member) => {
+    this.setState({ loading: true, errorMessage: '' });
+
+    try {
+      const accounts = await web3.eth.getAccounts();
+      await factory.methods.removeMember(member).send({ from: accounts[0] });
+
+      Router.pushRoute(`/users/${this.state.userAddress}/add-user`);
+    } catch (err) {
+      this.setState({ errorMessage: err.message });
+      console.log(err.message);
+    }
+
+    this.setState({ loading: false });
+  }
+
+  renderMembers() {
+    const { Row, Cell } = Table;
+    const { memberInfo, memberIdsLength } = this.state;
+    let x = [];
+
+    for (let i = 0; i < memberIdsLength; i++) {
+      x[i] =
+        <Row>
+          <Cell>
+            <Link route={`/users/${memberInfo.memberIds[i]}`}>
+              <a className="item">
+                {web3.utils.toAscii(memberInfo.memberProfiles[i][1])}
+              </a>
+            </Link>
+          </Cell>
+
+          <Cell>
+            <Link route={`/users/${memberInfo.memberIds[i]}`}>
+              <a className="item">
+                {memberInfo.memberIds[i]}
+              </a>
+            </Link>
+          </Cell>
+
+          <Cell>{memberInfo.memberProfiles[i][3].length}</Cell>
+          <Cell textAlign='center'>
+            <Button onClick={() => this.onRemoveMember(member)} loading={this.state.loading}
+              icon="remove user" negative />
+          </Cell>
+        </Row>
+      ;
+    }
+
+    return x;
   }
 
   render() {
@@ -121,34 +181,40 @@ class ShowMembers extends Component {
 
               <Link route="/posts/new">
                 <a className="item">
-                  <Button fluid content="Create Post" icon="add circle" primary />
+                  <Button fluid content="Create Post" icon="compose" primary />
                 </a>
               </Link>
 
               <Link route={`/users/${this.state.userAddress}/add-user`}>
                 <a className="item">
-                  <Button fluid content="Add User" icon="add circle" primary style={{ marginTop: '10px' }} />
+                  <Button fluid content="Add User" icon="add user" primary style={{ marginTop: '10px' }} />
                 </a>
               </Link>
 
               <Link route={`/users/${this.state.userAddress}/show-users`}>
                 <a className="item">
-                  <Button fluid content="Show Users" icon="add circle" primary style={{ marginTop: '10px' }} />
+                  <Button fluid content="Show Users" icon="group" primary style={{ marginTop: '10px' }} />
                 </a>
               </Link>
+
+              <Button fluid onClick={event => this.onDeleteAccount(event)} loading={this.state.loading}
+              content="Delete Account" icon="user delete" negative style={{ marginTop: '10px' }} />
               
             </Grid.Column>
 
             <Grid.Column width={12}>
 
-              <Table>
+              <Table celled striped>
                 <Header>
                   <Row>
-                    <HeaderCell>User Address</HeaderCell>
+                    <HeaderCell>Address</HeaderCell>
+                    <HeaderCell>Name</HeaderCell>
+                    <HeaderCell colSpan='2'>Posts Count</HeaderCell>
                   </Row>
                 </Header>
 
                 <Body>{this.renderMembers()}</Body>
+                
               </Table>
 
             </Grid.Column>
@@ -157,7 +223,6 @@ class ShowMembers extends Component {
       </Layout>
     );
   };
-
 }
 
 export default ShowMembers;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Card, Form, Grid, Input, Message } from 'semantic-ui-react';
+import { Button, Card, Form, Grid, Input, Message, Icon } from 'semantic-ui-react';
 import Layout from "../../components/general/Layout";
 import factory from '../../ethereum/factory'; // import factory instance
 import web3 from '../../ethereum/web3';
@@ -15,7 +15,7 @@ class AddUser extends Component {
     name: '',
     role: '',
     organizationMembersCount: '0',
-    posts: '',
+    posts: [],
     userPostsCount: '0',
     socialMedia1: '',
     socialMedia2: '',
@@ -68,6 +68,24 @@ class AddUser extends Component {
     this.setState({ loading: false });
   };
 
+  onDeleteAccount = async (event) => {
+    this.setState({ loading: true, errorMessage: '' });
+    event.preventDefault();
+
+    try {
+      const accounts = await web3.eth.getAccounts();
+      let g = await factory.methods.deleteAccount().send({ from: accounts[0] });
+
+      console.log('g: ', g);
+
+      Router.pushRoute('/');
+    } catch (err) {
+      console.log('err: ', err);
+    }
+
+    this.setState({ loading: false });
+  }
+
   renderEssentials() {
     const { Content, Header, Meta, Description } = Card;
 
@@ -103,21 +121,24 @@ class AddUser extends Component {
 
               <Link route="/posts/new">
                 <a className="item">
-                  <Button fluid content="Create Post" icon="add circle" primary />
+                  <Button fluid content="Create Post" icon="compose" primary />
                 </a>
               </Link>
 
               <Link route={`/users/${this.state.userAddress}/add-user`}>
                 <a className="item">
-                  <Button fluid content="Add User" icon="add circle" primary style={{ marginTop: '10px' }} />
+                  <Button fluid content="Add User" icon="add user" primary style={{ marginTop: '10px' }} />
                 </a>
               </Link>
 
               <Link route={`/users/${this.state.userAddress}/show-users`}>
                 <a className="item">
-                  <Button fluid content="Show Users" icon="add circle" primary style={{ marginTop: '10px' }} />
+                  <Button fluid content="Show Users" icon="group" primary style={{ marginTop: '10px' }} />
                 </a>
               </Link>
+
+              <Button fluid onClick={event => this.onDeleteAccount(event)} loading={this.state.loading}
+              content="Delete Account" icon="user delete" negative style={{ marginTop: '10px' }} />
               
             </Grid.Column>
 

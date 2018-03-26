@@ -29,7 +29,9 @@ class Header extends Component {
 
         <Menu.Menu position="right">
           <Link route="/posts/new">
-            <a className="item">+</a>
+            <a className="item">
+              <Icon name="compose" />
+            </a>
           </Link>
 
           <Link route={`/users/${this.state.userAddress}`}>
