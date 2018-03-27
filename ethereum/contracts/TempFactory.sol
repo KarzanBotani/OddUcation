@@ -506,11 +506,11 @@ contract Post is Destructible {
     hasVoted[msg.sender] = true;
     
     if (_voteVal) {
-        upVotes = upVotes.add(1);
-        emit OnVote(address(this), msg.sender, _voteVal, upVotes);   
+      upVotes = upVotes.add(1);
+      emit OnVote(address(this), msg.sender, _voteVal, upVotes);   
     } else {
-        downVotes = downVotes.add(1);
-        emit OnVote(address(this), msg.sender, _voteVal, downVotes);
+      downVotes = downVotes.add(1);
+      emit OnVote(address(this), msg.sender, _voteVal, downVotes);
     }
   }
 

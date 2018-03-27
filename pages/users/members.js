@@ -4,7 +4,6 @@ import Layout from "../../components/general/Layout";
 import factory from '../../ethereum/factory'; // import factory instance
 import web3 from '../../ethereum/web3';
 import { Link, Router } from '../../routes';
-import profile from "./profile";
 
 class ShowMembers extends Component {
 
@@ -99,8 +98,6 @@ class ShowMembers extends Component {
     try {
       const accounts = await web3.eth.getAccounts();
       let g = await factory.methods.deleteAccount().send({ from: accounts[0] });
-
-      console.log('g: ', g);
 
       Router.pushRoute('/');
     } catch (err) {

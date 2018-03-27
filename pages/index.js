@@ -12,7 +12,8 @@ class PostIndex extends Component {
   state = {
     errorMessage: '',
     loading: false,
-    postSummaries: []
+    postSummaries: [],
+    postsCount: ''
   };
 
   // getInitialProps is required by next. next wants to  get the data without having to render the component.
@@ -27,14 +28,24 @@ class PostIndex extends Component {
 
   async componentDidMount() {
     try {
-      let postSums = [];
 
-      await this.props.posts.map(async (y, i) => {
-        const p = Post(y);
-        const sum = await p.methods.getPostSummary().call();
-        this.state.postSummaries.push(sum);
+      this.setState({ postsCount: await factory.methods.postsCount().call() });
+
+      let postAddresses = [];
+      let allSum = [];
+      let postsCount;
+
+      for (let addr of this.props.posts) {
+        let p = Post(addr);
+        let o = await p.methods.getPostSummary().call();
+
+        postAddresses.push(addr);
+        allSum.push(o);
+      }
+
+      await this.setState({ 
+        postSummaries: { postAddresses, allSum }
       });
-
 
     } catch (err) {
       console.log(err);
@@ -44,47 +55,31 @@ class PostIndex extends Component {
   renderPosts() {
     try {
       const { Group, Content, Header, Meta, Description } = Card;
-      const { Row, Column } = Grid;
-      const { postSummaries } = this.state;
+      const { postSummaries, postsCount } = this.state;
+      let q = [];
 
-      let postCards = postSummaries.map((s) => {
-        return (
-          <Link route={'/'}>
-            <Card>
-            <Image src='https://react.semantic-ui.com/assets/images/wireframe/image.png' />
+      for (let i = 0; i < postsCount; i++) {
+        q[i] =
+          <Link route={`/posts/${postSummaries.postAddresses[i]}`}>
+            <Card style={{ maxWidth: '240px' }}>
+              <Image src='https://react.semantic-ui.com/assets/images/wireframe/image.png' />
               <Content>
-                <Header>{web3.utils.hexToUtf8(s[1])}</Header>
+                <Header>{web3.utils.toAscii(postSummaries.allSum[i][1])}</Header>
                 <Meta>
-                  <span style={{ float: 'right' }}>{s[8]} views</span>
+                  <span style={{ float: 'right' }}>{postSummaries.allSum[i][8]} views</span>
                   <span>by {this.state.name}</span>
                 </Meta>
                 <Content extra>
-                  <span style={{ float: 'right' }}>up: {s[10]} / down: {s[11]}</span>
-                  <span>date: {s[6]}</span>
+                  <span style={{ float: 'right' }}>up: {postSummaries.allSum[i][10]} / down: {postSummaries.allSum[i][11]}</span>
+                  <span>date: {postSummaries.allSum[i][6]}</span>
                 </Content>
               </Content>
             </Card>
           </Link>
-        )
-      });
+        ;
+      }
 
-      return <Group itemsPerRow={3}>{postCards}</Group>
-
-      // return (
-      //   <Grid columns={3} padded>
-      //     <Row>
-      //       <Column>{postCards[0]}</Column>
-      //       <Column>{postCards[1]}</Column>
-      //       <Column>{postCards[2]}</Column>
-      //     </Row>
-
-      //     <Row>
-      //       <Column>{postCards[3]}</Column>
-      //       <Column>{postCards[4]}</Column>
-      //       <Column>{postCards[5]}</Column>
-      //     </Row>
-      //   </Grid>
-      // )
+      return <Group>{q}</Group>;
     } catch (err) {
       console.log(err);
     }
@@ -100,57 +95,9 @@ class PostIndex extends Component {
             <Column>{this.renderPosts()}</Column>
           </Row>
         </Grid>
-        
       </Layout>
     )
   }
-
-  // render() {
-  //   return (
-  //     <Layout>
-  //       <Grid>
-  //         <Grid.Row>
-  //           <Grid.Column width={16}>
-  //             {this.renderPosts()}
-  //           </Grid.Column>
-  //         </Grid.Row>
-  //       </Grid>
-  //     </Layout>
-  //   )
-  // }
-
-  // renderPosts() {
-  //   const items = this.props.posts.map(address => {
-
-  //     return {
-  //       header: address,
-  //       description: (
-  //         <Link route={`/posts/${address}`}>
-  //           <a>View Post</a>
-  //         </Link>
-  //       ),
-  //       fluid: true // change this later
-  //     }
-  //   });
-
-  //   return <Card.Group items={items} />;
-  // }
-
-  // render() {
-  //   return (
-  //     <Layout>
-  //       <div>
-  //         <h3>Latest Posts:</h3>
-  //         <Link route="/posts/new">
-  //           <a className="item">
-  //             <Button floated="right" content="Create Post" icon="compose" primary />
-  //           </a>
-  //         </Link>
-  //         {this.renderPosts()}
-  //       </div>
-  //     </Layout>
-  //   );
-  // }
 
 }
 

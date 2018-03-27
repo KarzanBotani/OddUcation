@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -486,8 +486,7 @@ var UserProfile = function (_Component) {
       socialMedia1: '',
       socialMedia2: '',
       socialMedia3: '',
-      postSummaries: [],
-      poaw: []
+      postSummaries: []
     }, _this.onDeleteAccount = function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(event) {
         var accounts, g;
@@ -511,28 +510,26 @@ var UserProfile = function (_Component) {
                 g = _context.sent;
 
 
-                console.log('g: ', g);
-
                 __WEBPACK_IMPORTED_MODULE_7__routes__["Router"].pushRoute('/');
-                _context.next = 16;
+                _context.next = 15;
                 break;
 
-              case 13:
-                _context.prev = 13;
+              case 12:
+                _context.prev = 12;
                 _context.t0 = _context["catch"](2);
 
                 console.log('err: ', _context.t0);
 
-              case 16:
+              case 15:
 
                 _this.setState({ loading: false });
 
-              case 17:
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, _this2, [[2, 13]]);
+        }, _callee, _this2, [[2, 12]]);
       }));
 
       return function (_x) {
@@ -544,35 +541,34 @@ var UserProfile = function (_Component) {
   _createClass(UserProfile, [{
     key: "componentDidMount",
     value: function () {
-      var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
-        var _this3 = this;
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+        var accounts, balance, profileSummary, userPostsCount, postAddresses, allSum, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, addr, p, o;
 
-        var accounts, balance, profileSummary, userPostsCount;
-        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context3.prev = 0;
-                _context3.next = 3;
+                _context2.prev = 0;
+                _context2.next = 3;
                 return __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].eth.getAccounts();
 
               case 3:
-                accounts = _context3.sent;
-                _context3.next = 6;
+                accounts = _context2.sent;
+                _context2.next = 6;
                 return __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].eth.getBalance(accounts[0]);
 
               case 6:
-                balance = _context3.sent;
-                _context3.next = 9;
+                balance = _context2.sent;
+                _context2.next = 9;
                 return __WEBPACK_IMPORTED_MODULE_4__ethereum_factory__["a" /* default */].methods.getProfile(accounts[0]).call();
 
               case 9:
-                profileSummary = _context3.sent;
-                _context3.next = 12;
+                profileSummary = _context2.sent;
+                _context2.next = 12;
                 return __WEBPACK_IMPORTED_MODULE_4__ethereum_factory__["a" /* default */].methods.userPostsCount(accounts[0]).call();
 
               case 12:
-                userPostsCount = _context3.sent;
+                userPostsCount = _context2.sent;
 
 
                 if (profileSummary[0] === '1') {
@@ -591,60 +587,93 @@ var UserProfile = function (_Component) {
                 this.setState({ posts: profileSummary[3] });
                 this.setState({ userPostsCount: userPostsCount });
 
-                _context3.next = 24;
-                return profileSummary[3].map(function () {
-                  var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(address, index) {
-                    var p, sum, x;
-                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-                      while (1) {
-                        switch (_context2.prev = _context2.next) {
-                          case 0:
-                            p = Object(__WEBPACK_IMPORTED_MODULE_5__ethereum_post__["a" /* default */])(address);
-                            _context2.next = 3;
-                            return p.methods.getPostSummary().call();
-
-                          case 3:
-                            sum = _context2.sent;
-
-                            _this3.state.postSummaries.push(sum);
-
-                            _context2.next = 7;
-                            return __WEBPACK_IMPORTED_MODULE_4__ethereum_factory__["a" /* default */].methods.getProfile(sum[0]).call();
-
-                          case 7:
-                            x = _context2.sent;
-
-                            _this3.state.poaw.push(x);
-
-                          case 9:
-                          case "end":
-                            return _context2.stop();
-                        }
-                      }
-                    }, _callee2, _this3);
-                  }));
-
-                  return function (_x2, _x3) {
-                    return _ref4.apply(this, arguments);
-                  };
-                }());
-
-              case 24:
-                _context3.next = 29;
-                break;
-
-              case 26:
-                _context3.prev = 26;
-                _context3.t0 = _context3["catch"](0);
-
-                console.log(_context3.t0);
+                postAddresses = [];
+                allSum = [];
+                _iteratorNormalCompletion = true;
+                _didIteratorError = false;
+                _iteratorError = undefined;
+                _context2.prev = 27;
+                _iterator = profileSummary[3][Symbol.iterator]();
 
               case 29:
+                if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                  _context2.next = 40;
+                  break;
+                }
+
+                addr = _step.value;
+                p = Object(__WEBPACK_IMPORTED_MODULE_5__ethereum_post__["a" /* default */])(addr);
+                _context2.next = 34;
+                return p.methods.getPostSummary().call();
+
+              case 34:
+                o = _context2.sent;
+
+
+                postAddresses.push(addr);
+                allSum.push(o);
+
+              case 37:
+                _iteratorNormalCompletion = true;
+                _context2.next = 29;
+                break;
+
+              case 40:
+                _context2.next = 46;
+                break;
+
+              case 42:
+                _context2.prev = 42;
+                _context2.t0 = _context2["catch"](27);
+                _didIteratorError = true;
+                _iteratorError = _context2.t0;
+
+              case 46:
+                _context2.prev = 46;
+                _context2.prev = 47;
+
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                  _iterator.return();
+                }
+
+              case 49:
+                _context2.prev = 49;
+
+                if (!_didIteratorError) {
+                  _context2.next = 52;
+                  break;
+                }
+
+                throw _iteratorError;
+
+              case 52:
+                return _context2.finish(49);
+
+              case 53:
+                return _context2.finish(46);
+
+              case 54:
+                _context2.next = 56;
+                return this.setState({
+                  postSummaries: { postAddresses: postAddresses, allSum: allSum }
+                });
+
+              case 56:
+                _context2.next = 61;
+                break;
+
+              case 58:
+                _context2.prev = 58;
+                _context2.t1 = _context2["catch"](0);
+
+                console.log(_context2.t1);
+
+              case 61:
               case "end":
-                return _context3.stop();
+                return _context2.stop();
             }
           }
-        }, _callee3, this, [[0, 26]]);
+        }, _callee2, this, [[0, 58], [27, 42, 46, 54], [47,, 49, 53]]);
       }));
 
       function componentDidMount() {
@@ -678,7 +707,7 @@ var UserProfile = function (_Component) {
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 73
+              lineNumber: 78
             }
           },
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -686,7 +715,7 @@ var UserProfile = function (_Component) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 74
+                lineNumber: 79
               }
             },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -694,7 +723,7 @@ var UserProfile = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 75
+                  lineNumber: 80
                 }
               },
               name,
@@ -707,7 +736,7 @@ var UserProfile = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 76
+                  lineNumber: 81
                 }
               },
               organizationMembersCount,
@@ -718,7 +747,7 @@ var UserProfile = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 77
+                  lineNumber: 82
                 }
               },
               userPostsCount,
@@ -729,7 +758,7 @@ var UserProfile = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 78
+                  lineNumber: 83
                 }
               },
               "Balance: ",
@@ -740,7 +769,7 @@ var UserProfile = function (_Component) {
               Content,
               { extra: true, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 79
+                  lineNumber: 84
                 }
               },
               socialMedia1
@@ -749,7 +778,7 @@ var UserProfile = function (_Component) {
               Content,
               { extra: true, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 80
+                  lineNumber: 85
                 }
               },
               socialMedia2
@@ -758,7 +787,7 @@ var UserProfile = function (_Component) {
               Content,
               { extra: true, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 81
+                  lineNumber: 86
                 }
               },
               socialMedia3
@@ -770,7 +799,7 @@ var UserProfile = function (_Component) {
           __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"],
           { fluid: true, __source: {
               fileName: _jsxFileName,
-              lineNumber: 89
+              lineNumber: 94
             }
           },
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -778,7 +807,7 @@ var UserProfile = function (_Component) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 90
+                lineNumber: 95
               }
             },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -786,7 +815,7 @@ var UserProfile = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 91
+                  lineNumber: 96
                 }
               },
               name,
@@ -799,7 +828,7 @@ var UserProfile = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 92
+                  lineNumber: 97
                 }
               },
               userPostsCount,
@@ -810,7 +839,7 @@ var UserProfile = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 93
+                  lineNumber: 98
                 }
               },
               "Balance: ",
@@ -821,7 +850,7 @@ var UserProfile = function (_Component) {
               Content,
               { extra: true, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 94
+                  lineNumber: 99
                 }
               },
               socialMedia1
@@ -830,7 +859,7 @@ var UserProfile = function (_Component) {
               Content,
               { extra: true, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 95
+                  lineNumber: 100
                 }
               },
               socialMedia2
@@ -839,7 +868,7 @@ var UserProfile = function (_Component) {
               Content,
               { extra: true, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 96
+                  lineNumber: 101
                 }
               },
               socialMedia3
@@ -851,35 +880,36 @@ var UserProfile = function (_Component) {
   }, {
     key: "renderPosts",
     value: function renderPosts() {
-      var _this4 = this;
-
       try {
         var Group = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"].Group,
             Content = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"].Content,
             Header = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"].Header,
             Meta = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"].Meta,
             Description = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"].Description;
-        var postSummaries = this.state.postSummaries;
+        var _state2 = this.state,
+            postSummaries = _state2.postSummaries,
+            userPostsCount = _state2.userPostsCount;
 
+        var q = [];
 
-        var postCards = postSummaries.map(function (s) {
-          return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+        for (var i = 0; i < userPostsCount; i++) {
+          q[i] = __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_7__routes__["Link"],
-            { route: '/', __source: {
+            { route: "/posts/" + postSummaries.postAddresses[i], __source: {
                 fileName: _jsxFileName,
-                lineNumber: 110
+                lineNumber: 116
               }
             },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"],
               { style: { maxWidth: '240px' }, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 111
+                  lineNumber: 117
                 }
               },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Image"], { src: "https://react.semantic-ui.com/assets/images/wireframe/image.png", __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 112
+                  lineNumber: 118
                 }
               }),
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -887,7 +917,7 @@ var UserProfile = function (_Component) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 113
+                    lineNumber: 119
                   }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -895,27 +925,27 @@ var UserProfile = function (_Component) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 114
+                      lineNumber: 120
                     }
                   },
-                  __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].utils.hexToUtf8(s[1])
+                  __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].utils.toAscii(postSummaries.allSum[i][1])
                 ),
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   Meta,
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 115
+                      lineNumber: 121
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     "span",
                     { style: { float: 'right' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 116
+                        lineNumber: 122
                       }
                     },
-                    s[8],
+                    postSummaries.allSum[i][8],
                     " views"
                   ),
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -923,58 +953,58 @@ var UserProfile = function (_Component) {
                     {
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 117
+                        lineNumber: 123
                       }
                     },
                     "by ",
-                    _this4.state.name
+                    this.state.name
                   )
                 ),
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   Content,
                   { extra: true, __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 119
+                      lineNumber: 125
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     "span",
                     { style: { float: 'right' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 120
+                        lineNumber: 126
                       }
                     },
                     "up: ",
-                    s[10],
+                    postSummaries.allSum[i][10],
                     " / down: ",
-                    s[11]
+                    postSummaries.allSum[i][11]
                   ),
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     "span",
                     {
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 121
+                        lineNumber: 127
                       }
                     },
                     "date: ",
-                    s[6]
+                    postSummaries.allSum[i][6]
                   )
                 )
               )
             )
           );
-        });
+        }
 
         return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           Group,
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 129
+              lineNumber: 135
             }
           },
-          postCards
+          q
         );
       } catch (err) {
         console.log(err);
@@ -983,14 +1013,14 @@ var UserProfile = function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this3 = this;
 
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         __WEBPACK_IMPORTED_MODULE_3__components_general_Layout__["a" /* default */],
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 155
+            lineNumber: 159
           }
         },
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -998,7 +1028,7 @@ var UserProfile = function (_Component) {
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 156
+              lineNumber: 160
             }
           },
           "UserProfile"
@@ -1008,7 +1038,7 @@ var UserProfile = function (_Component) {
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 158
+              lineNumber: 162
             }
           },
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -1016,14 +1046,14 @@ var UserProfile = function (_Component) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 159
+                lineNumber: 163
               }
             },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Grid"].Column,
               { width: 4, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 160
+                  lineNumber: 164
                 }
               },
               this.renderEssentials(),
@@ -1031,19 +1061,19 @@ var UserProfile = function (_Component) {
                 __WEBPACK_IMPORTED_MODULE_7__routes__["Link"],
                 { route: "/posts/new", __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 163
+                    lineNumber: 167
                   }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   "a",
                   { className: "item", __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 164
+                      lineNumber: 168
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Button"], { fluid: true, content: "Create Post", icon: "compose", primary: true, __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 165
+                      lineNumber: 169
                     }
                   })
                 )
@@ -1052,19 +1082,19 @@ var UserProfile = function (_Component) {
                 __WEBPACK_IMPORTED_MODULE_7__routes__["Link"],
                 { route: "/users/" + this.state.userAddress + "/add-user", __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 169
+                    lineNumber: 173
                   }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   "a",
                   { className: "item", __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 170
+                      lineNumber: 174
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Button"], { fluid: true, content: "Add User", icon: "add user", primary: true, style: { marginTop: '10px' }, __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 171
+                      lineNumber: 175
                     }
                   })
                 )
@@ -1073,29 +1103,29 @@ var UserProfile = function (_Component) {
                 __WEBPACK_IMPORTED_MODULE_7__routes__["Link"],
                 { route: "/users/" + this.state.userAddress + "/show-users", __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 175
+                    lineNumber: 179
                   }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   "a",
                   { className: "item", __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 176
+                      lineNumber: 180
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Button"], { fluid: true, content: "Show Users", icon: "group", primary: true, style: { marginTop: '10px' }, __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 177
+                      lineNumber: 181
                     }
                   })
                 )
               ),
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Button"], { fluid: true, onClick: function onClick(event) {
-                  return _this5.onDeleteAccount(event);
+                  return _this3.onDeleteAccount(event);
                 }, loading: this.state.loading,
                 content: "Delete Account", icon: "user delete", negative: true, style: { marginTop: '10px' }, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 181
+                  lineNumber: 185
                 }
               })
             ),
@@ -1103,7 +1133,7 @@ var UserProfile = function (_Component) {
               __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Grid"].Column,
               { width: 12, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 185
+                  lineNumber: 189
                 }
               },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -1111,7 +1141,7 @@ var UserProfile = function (_Component) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 186
+                    lineNumber: 190
                   }
                 },
                 "My Posts:"
@@ -1140,14 +1170,14 @@ var routes = __webpack_require__("next-routes")(); // ()() = require statement r
 
 // first argument = pattern you want to look for. wildcard = :
 // second argument = what component do we want to show
-routes.add('/users/:address', '/users/profile').add('/users/:address/add-user', '/users/add').add('/users/:address/show-users', '/users/members').add('/posts/new', '/posts/new') // this line is needed because the '/posts/show' line on line 7 is a wildcard that ruins the path
+routes.add('/users/:address', '/users/profile').add('/users/:address/add-user', '/users/add').add('/users/:address/show-users', '/users/members').add('/organizations', '/users/organization/organizations').add('/posts/new', '/posts/new') // this line is needed because the '/posts/show' line on line 7 is a wildcard that ruins the path
 .add('/posts/:address', '/posts/show');
 
 module.exports = routes;
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./pages/users/profile.js");

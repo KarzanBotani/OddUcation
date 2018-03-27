@@ -22,8 +22,7 @@ class UserProfile extends Component {
     socialMedia1: '',
     socialMedia2: '',
     socialMedia3: '',
-    postSummaries: [],
-    poaw: []
+    postSummaries: []
   }
 
   async componentDidMount() {
@@ -50,13 +49,19 @@ class UserProfile extends Component {
       this.setState({ posts: profileSummary[3] });
       this.setState({ userPostsCount: userPostsCount });
 
-      await profileSummary[3].map(async (address, index) => {
-        const p = Post(address);
-        const sum = await p.methods.getPostSummary().call();
-        this.state.postSummaries.push(sum);
-        
-        const x = await factory.methods.getProfile(sum[0]).call();
-        this.state.poaw.push(x);
+      let postAddresses = [];
+      let allSum = [];
+
+      for (let addr of profileSummary[3]) {
+        let p = Post(addr);
+        let o = await p.methods.getPostSummary().call();
+
+        postAddresses.push(addr);
+        allSum.push(o);
+      }
+
+      await this.setState({
+        postSummaries: { postAddresses, allSum }
       });
       
     } catch (err) {
@@ -103,30 +108,31 @@ class UserProfile extends Component {
   renderPosts() {
     try {
       const { Group, Content, Header, Meta, Description } = Card;
-      const { postSummaries } = this.state;
+      const { postSummaries, userPostsCount } = this.state;
+      let q = [];
 
-      let postCards = postSummaries.map((s) => {
-        return (
-          <Link route={'/'}>
+      for (let i = 0; i < userPostsCount; i++) {
+        q[i] =
+          <Link route={`/posts/${postSummaries.postAddresses[i]}`}>
             <Card style={{ maxWidth: '240px' }}>
-            <Image src='https://react.semantic-ui.com/assets/images/wireframe/image.png' />
+              <Image src='https://react.semantic-ui.com/assets/images/wireframe/image.png' />
               <Content>
-                <Header>{web3.utils.hexToUtf8(s[1])}</Header>
+                <Header>{web3.utils.toAscii(postSummaries.allSum[i][1])}</Header>
                 <Meta>
-                  <span style={{ float: 'right' }}>{s[8]} views</span>
+                  <span style={{ float: 'right' }}>{postSummaries.allSum[i][8]} views</span>
                   <span>by {this.state.name}</span>
                 </Meta>
                 <Content extra>
-                  <span style={{ float: 'right' }}>up: {s[10]} / down: {s[11]}</span>
-                  <span>date: {s[6]}</span>
+                  <span style={{ float: 'right' }}>up: {postSummaries.allSum[i][10]} / down: {postSummaries.allSum[i][11]}</span>
+                  <span>date: {postSummaries.allSum[i][6]}</span>
                 </Content>
               </Content>
             </Card>
           </Link>
-        )
-      });
+        ;
+      }
 
-      return <Group>{postCards}</Group>
+      return <Group>{q}</Group>;
     } catch (err) {
       console.log(err);
     }
@@ -139,9 +145,7 @@ class UserProfile extends Component {
     try {
       const accounts = await web3.eth.getAccounts();
       let g = await factory.methods.deleteAccount().send({ from: accounts[0] });
-
-      console.log('g: ', g);
-
+      
       Router.pushRoute('/');
     } catch (err) {
       console.log('err: ', err);

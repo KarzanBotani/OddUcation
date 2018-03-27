@@ -7,6 +7,7 @@ import web3 from '../../ethereum/web3';
 import { Link, Router } from '../../routes'; // Link = react component for <a> tags - navigation. Router = redirect from one page to another
 
 class PostNew extends Component {
+  
   state = {
     errorMessage: '',
     loading: false,
@@ -22,10 +23,10 @@ class PostNew extends Component {
     state: '',
     category: '',
     pType: '',
-    level: ''
+    level: '',
+    postCount: ''
   };
 
-  // functions from contracts must use 'async/await'
   onSubmit = async (event) => {
     event.preventDefault();
 
@@ -60,7 +61,6 @@ class PostNew extends Component {
     this.setState({ loading: false });
   };
 
-  // !! = when you want to convert to false
   render() {
     return (
       <Layout>

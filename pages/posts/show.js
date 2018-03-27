@@ -1,18 +1,29 @@
 import React, { Component } from "react";
-import { Card, Grid, Table } from "semantic-ui-react";
+import { Card, Grid, Table, Input } from "semantic-ui-react";
 import Layout from "../../components/general/Layout";
+import IncreasePoolForm from "../../components/posts/IncreasePoolForm";
+import Vote from "../../components/posts/Vote";
+import factory from "../../ethereum/factory";
 import Post from "../../ethereum/post"; // not construct (capital P)
 import web3 from "../../ethereum/web3";
+import { Link, Router } from '../../routes';
 
 class PostShow extends Component {
+  state = {
+    ownerName: ''
+  };
+
   static async getInitialProps(props) {
     const post = Post(props.query.address);
 
     const summary = await post.methods.getPostSummary().call();
     const enumSummary = await post.methods.getPostSummaryEnums().call();
+    const n = await factory.methods.getProfile(summary[0]).call();
 
     return {
+      address: props.query.address,
       owner: summary[0],
+      ownerName: n[1],
       title: web3.utils.toAscii(summary[1]),
       description: web3.utils.toAscii(summary[2]),
       contentHash: summary[3],
@@ -28,13 +39,18 @@ class PostShow extends Component {
       state: enumSummary[1],
       category: enumSummary[2],
       type: enumSummary[3],
-      level: enumSummary[4]
+      level: enumSummary[4],
+      postSummary: summary
     };
   }
 
   renderTables() {
+
+    const { Body, Cell, Row } = Table;
+
     const {
       owner,
+      ownerName,
       title,
       description,
       contentHash,
@@ -55,77 +71,124 @@ class PostShow extends Component {
 
     const tab = (
       <Table celled striped>
-        <Table.Body>
-          <Table.Row>
-            <Table.Cell collapsing>Author:</Table.Cell>
-            <Table.Cell textAlign="right" style={{ fontSize: '10px' }}>{owner}</Table.Cell>
-          </Table.Row>
+        <Body>
+          <Row>
+            <Cell collapsing>Author:</Cell>
+            <Cell textAlign="right">
+              <Link route={`/users/${owner}`}>
+                <a className="item">
+                  {web3.utils.hexToUtf8(ownerName)}
+                </a>
+              </Link>
+            </Cell>
+          </Row>
 
-          <Table.Row>
-            <Table.Cell collapsing>Remaining Pool:</Table.Cell>
-            <Table.Cell textAlign="right">{postBalance}</Table.Cell>
-          </Table.Row>
+          <Row>
+            <Cell collapsing>Remaining Pool:</Cell>
+            <Cell textAlign="right">{web3.utils.fromWei(postBalance, 'ether')} (ETH)</Cell>
+          </Row>
 
-          <Table.Row>
-            <Table.Cell collapsing>Uploaded:</Table.Cell>
-            <Table.Cell textAlign="right">{date}</Table.Cell>
-          </Table.Row>
+          <Row>
+            <Cell collapsing>Uploaded:</Cell>
+            <Cell textAlign="right">{date}</Cell>
+          </Row>
 
-          <Table.Row>
-            <Table.Cell collapsing>Views:</Table.Cell>
-            <Table.Cell textAlign="right">{views}</Table.Cell>
-          </Table.Row>
+          <Row>
+            <Cell collapsing>Views:</Cell>
+            <Cell textAlign="right">{views}</Cell>
+          </Row>
 
-          <Table.Row>
-            <Table.Cell collapsing>Length:</Table.Cell>
-            <Table.Cell textAlign="right">{length}</Table.Cell>
-          </Table.Row>
+          <Row>
+            <Cell collapsing>Length:</Cell>
+            <Cell textAlign="right">{length}</Cell>
+          </Row>
 
-          <Table.Row>
-            <Table.Cell collapsing>Level:</Table.Cell>
-            <Table.Cell textAlign="right">{level}</Table.Cell>
-          </Table.Row>
+          <Row>
+            <Cell collapsing>Level:</Cell>
+            <Cell textAlign="right">
+              {(() => {
+                switch (level) {
+                  case "0": return "Introductory";
+                  case "1": return "Beginner";
+                  case "2": return "Intermediate";
+                  case "3": return "Advanced";
+                }
+              })()}
+            </Cell>
+          </Row>
 
-          <Table.Row>
-            <Table.Cell collapsing>Language:</Table.Cell>
-            <Table.Cell textAlign="right">{language}</Table.Cell>
-          </Table.Row>
+          <Row>
+            <Cell collapsing>Language:</Cell>
+            <Cell textAlign="right">{language}</Cell>
+          </Row>
 
-          <Table.Row>
-            <Table.Cell collapsing>Category:</Table.Cell>
-            <Table.Cell textAlign="right">{category}</Table.Cell>
-          </Table.Row>
+          <Row>
+            <Cell collapsing>Category:</Cell>
+            <Cell textAlign="right">
+              {(() => {
+                switch (category) {
+                  case "0": return "Programming";
+                  case "1": return "Math";
+                }
+              })()}
+            </Cell>
+          </Row>
 
-          <Table.Row>
-            <Table.Cell collapsing>Upvotes:</Table.Cell>
-            <Table.Cell textAlign="right">{upVotes}</Table.Cell>
-          </Table.Row>
+          <Row>
+            <Cell collapsing>Upvotes:</Cell>
+            <Cell textAlign="right">{upVotes}</Cell>
+          </Row>
 
-          <Table.Row>
-            <Table.Cell collapsing>Downvotes:</Table.Cell>
-            <Table.Cell textAlign="right">{downVotes}</Table.Cell>
-          </Table.Row>
+          <Row>
+            <Cell collapsing>Downvotes:</Cell>
+            <Cell textAlign="right">{downVotes}</Cell>
+          </Row>
 
-          <Table.Row>
-            <Table.Cell collapsing>View fee:</Table.Cell>
-            <Table.Cell textAlign="right">{viewFee}</Table.Cell>
-          </Table.Row>
+          <Row>
+            <Cell collapsing>View fee:</Cell>
+            <Cell textAlign="right">{viewFee}</Cell>
+          </Row>
 
-          <Table.Row>
-            <Table.Cell collapsing>State:</Table.Cell>
-            <Table.Cell textAlign="right">{state}</Table.Cell>
-          </Table.Row>
+          <Row>
+            <Cell collapsing>State:</Cell>
+            <Cell textAlign="right">
+              {(() => {
+                switch (state) {
+                  case "0": return "Draft";
+                  case "1": return "Published";
+                  case "2": return "Archived";
+                }
+              })()}
+            </Cell>
+          </Row>
 
-          <Table.Row>
-            <Table.Cell collapsing>Type:</Table.Cell>
-            <Table.Cell textAlign="right">{type}</Table.Cell>
-          </Table.Row>
+          <Row>
+            <Cell collapsing>Type:</Cell>
+            <Cell textAlign="right">
+              {(() => {
+                switch (type) {
+                  case "0": return "Audio";
+                  case "1": return "Text";
+                  case "2": return "Video";
+                }
+              })()}
+            </Cell>
 
-          <Table.Row>
-            <Table.Cell collapsing>Payment Option:</Table.Cell>
-            <Table.Cell textAlign="right">{paymentOption}</Table.Cell>
-          </Table.Row>
-        </Table.Body>
+
+          </Row>
+
+          <Row>
+            <Cell collapsing>Payment Option:</Cell>
+            <Cell textAlign="right">
+              {(() => {
+                switch (paymentOption) {
+                  case "0": return "Regular";
+                  case "1": return "Organization";
+                }
+              })()}
+            </Cell>
+          </Row>
+        </Body>
       </Table>
     );
 
@@ -138,16 +201,22 @@ class PostShow extends Component {
         <h3>{this.props.title}</h3>
 
         <Grid>
-          <Grid.Column width={10}>
-            <Card fluid>
-              <Card.Content header="Description:" />
-              <Card.Content
-                description="Lorem ipsum dolor sit amet, cu harum tollit temporibus nec, no solum melius quaerendum cum. Id soleat postea pro. Accumsan sapientem mei at, ne dicat nonumy sanctus sea. Fuisset atomorum eu qui. Nostro nominavi salutandi ut mei, ludus epicurei evertitur cu cum. Illum scribentur ad sit, ad per facer eligendi. Cum te idque blandit postulant, at minim verterem erroribus nam, choro platonem ius ut. Graeco quaestio ea mei. Nam wisi albucius hendrerit ei, mel cu ferri ignota phaedrum. Eu mei tollit mollis referrentur. Eum id viderer reprimique. Eos ex alia enim omittantur, mazim melius posidonium at nam. Ut his tantas mucius. Ne modo singulis intellegebat his. Ne vis porro adipisci perpetua, vel ludus salutatus cu."
-              />
-            </Card>
-          </Grid.Column>
+          <Grid.Row>
+            <Grid.Column width={10}>
+              <Card fluid>
+                <Card.Content header="Description:" />
+                <Card.Content
+                  description="Lorem ipsum dolor sit amet, cu harum tollit temporibus nec, no solum melius quaerendum cum. Id soleat postea pro. Accumsan sapientem mei at, ne dicat nonumy sanctus sea. Fuisset atomorum eu qui. Nostro nominavi salutandi ut mei, ludus epicurei evertitur cu cum. Illum scribentur ad sit, ad per facer eligendi. Cum te idque blandit postulant, at minim verterem erroribus nam, choro platonem ius ut. Graeco quaestio ea mei. Nam wisi albucius hendrerit ei, mel cu ferri ignota phaedrum. Eu mei tollit mollis referrentur. Eum id viderer reprimique. Eos ex alia enim omittantur, mazim melius posidonium at nam. Ut his tantas mucius. Ne modo singulis intellegebat his. Ne vis porro adipisci perpetua, vel ludus salutatus cu."
+                />
+              </Card>
+            </Grid.Column>
 
-          <Grid.Column width={6}>{this.renderTables()}</Grid.Column>
+            <Grid.Column width={6}>
+              <Vote address={this.props.address} />
+              <IncreasePoolForm address={this.props.address} />
+              {this.renderTables()}
+            </Grid.Column>
+          </Grid.Row>
         </Grid>
       </Layout>
     );

@@ -76,8 +76,6 @@ class AddUser extends Component {
       const accounts = await web3.eth.getAccounts();
       let g = await factory.methods.deleteAccount().send({ from: accounts[0] });
 
-      console.log('g: ', g);
-
       Router.pushRoute('/');
     } catch (err) {
       console.log('err: ', err);
