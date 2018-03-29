@@ -24,8 +24,12 @@ class UpdateProfile extends Component {
     postSummaries: [],
     newName: '',
     newRole: 1,
-    newSocialMedia: '',
-    newSocialMediaIndex: 0
+    newSocialMedia1: '',
+    newSocialMedia1Index: 0,
+    newSocialMedia2: '',
+    newSocialMedia2Index: 1,
+    newSocialMedia3: '',
+    newSocialMedia3Index: 2
   };
 
   async componentDidMount() {
@@ -147,23 +151,6 @@ class UpdateProfile extends Component {
     this.setState({ loading: false });
   };
 
-  onUpdateName = async (event) => {
-    event.preventDefault();
-
-    this.setState({ loading: true, errorMessage: '' });
-
-    try {
-      const accounts = await web3.eth.getAccounts();
-      await factory.methods.setName(web3.utils.utf8ToHex(this.state.newName)).send({ from: accounts[0] });
-      
-      Router.replaceRoute(`/users/${accounts[0]}/update-profile`);
-    } catch (err) {
-      this.setState({ errorMessage: err.message });
-    }
-
-    this.setState({ loading: false });
-  };
-
   onUpdateRole = async (event) => {
     event.preventDefault();
 
@@ -181,33 +168,79 @@ class UpdateProfile extends Component {
     this.setState({ loading: false });
   };
 
-  renderUpdateName() {
-    return (
-      <div style={{ margin: "15px" }}>
-        <Form onSubmit={this.onUpdateName} error={!!this.state.errorMessage}>
-          <Form.Field>
-            <Input
-              label="New Name"
-              size="mini"
-              value={this.state.newName}
-              onChange={event =>
-                this.setState({ newName: event.target.value })
-              }
-            />
-          </Form.Field>
+  onUpdateName = async (event) => {
+    event.preventDefault();
 
-          <Message error header="Oops!" content={this.state.errorMessage} />
-          <Button loading={this.state.loading} primary>Update Name</Button>
-        </Form>
-      </div>
-    );
-  }
+    this.setState({ loading: true, errorMessage: '' });
+
+    try {
+      const accounts = await web3.eth.getAccounts();
+      await factory.methods.setName(web3.utils.utf8ToHex(this.state.newName)).send({ from: accounts[0] });
+      
+      Router.replaceRoute(`/users/${accounts[0]}/update-profile`);
+    } catch (err) {
+      this.setState({ errorMessage: err.message });
+    }
+
+    this.setState({ loading: false });
+  };
+
+  onUpdateSocialMedia1 = async (event) => {
+    event.preventDefault();
+
+    this.setState({ loading: true, errorMessage: '' });
+
+    try {
+      const accounts = await web3.eth.getAccounts();
+      await factory.methods.setSocialMedia(this.state.newSocialMedia1Index , web3.utils.utf8ToHex(this.state.newSocialMedia1)).send({ from: accounts[0] });
+      
+      Router.replaceRoute(`/users/${accounts[0]}/update-profile`);
+    } catch (err) {
+      this.setState({ errorMessage: err.message });
+    }
+
+    this.setState({ loading: false });
+  };
+
+  onUpdateSocialMedia2 = async (event) => {
+    event.preventDefault();
+
+    this.setState({ loading: true, errorMessage: '' });
+
+    try {
+      const accounts = await web3.eth.getAccounts();
+      await factory.methods.setSocialMedia(this.state.newSocialMedia2Index , web3.utils.utf8ToHex(this.state.newSocialMedia2)).send({ from: accounts[0] });
+      
+      Router.replaceRoute(`/users/${accounts[0]}/update-profile`);
+    } catch (err) {
+      this.setState({ errorMessage: err.message });
+    }
+
+    this.setState({ loading: false });
+  };
+
+  onUpdateSocialMedia3 = async (event) => {
+    event.preventDefault();
+
+    this.setState({ loading: true, errorMessage: '' });
+
+    try {
+      const accounts = await web3.eth.getAccounts();
+      await factory.methods.setSocialMedia(this.state.newSocialMedia3Index , web3.utils.utf8ToHex(this.state.newSocialMedia3)).send({ from: accounts[0] });
+      
+      Router.replaceRoute(`/users/${accounts[0]}/update-profile`);
+    } catch (err) {
+      this.setState({ errorMessage: err.message });
+    }
+
+    this.setState({ loading: false });
+  };
 
   renderUpdateRole() {
     return (
       <div style={{ margin: "15px" }}>
         <Form onSubmit={this.onUpdateRole} error={!!this.state.errorMessage}>
-          <Form.Group fluid='true'>
+          <Form.Group style={{ margin: "8px 0 0 0", float: 'left' }} >
             <Form.Radio
               label="Regular"
               name="newRole"
@@ -224,6 +257,94 @@ class UpdateProfile extends Component {
 
           <Message error header="Oops!" content={this.state.errorMessage} />
           <Button loading={this.state.loading} primary>Update Role</Button>
+        </Form>
+      </div>
+    );
+  }
+
+  renderUpdateName() {
+    return (
+      <div style={{ margin: "15px" }}>
+        <Form onSubmit={this.onUpdateName} error={!!this.state.errorMessage}>
+          <Form.Field style={{ margin: '3px 0 0 0', float: 'left', width: '300px' }}>
+            <Input
+              label="New Name"
+              size="mini"
+              value={this.state.newName}
+              onChange={event =>
+                this.setState({ newName: event.target.value })
+              }
+            />
+          </Form.Field>
+
+          <Message error header="Oops!" content={this.state.errorMessage} />
+          <Button loading={this.state.loading} primary style={{ marginLeft: '15px' }}>Update Name</Button>
+        </Form>
+      </div>
+    );
+  }  
+
+  renderUpdateSocialMedia1() {
+    return (
+      <div style={{ margin: "15px" }}>
+        <Form onSubmit={this.onUpdateSocialMedia1} error={!!this.state.errorMessage}>
+          <Form.Field style={{ margin: '3px 0 0 0', float: 'left', width: '300px' }}>
+            <Input
+              label="New SocialMedia1"
+              size="mini"
+              value={this.state.newSocialMedia1}
+              onChange={event =>
+                this.setState({ newSocialMedia1: event.target.value })
+              }
+            />
+          </Form.Field>
+
+          <Message error header="Oops!" content={this.state.errorMessage} />
+          <Button loading={this.state.loading} primary style={{ marginLeft: '15px' }}>Update SocialMedia1</Button>
+        </Form>
+      </div>
+    );
+  }
+
+  renderUpdateSocialMedia2() {
+    return (
+      <div style={{ margin: "15px" }}>
+        <Form onSubmit={this.onUpdateSocialMedia2} error={!!this.state.errorMessage}>
+          <Form.Field style={{ margin: '3px 0 0 0', float: 'left', width: '300px' }}>
+            <Input
+              label="New SocialMedia2"
+              size="mini"
+              value={this.state.newSocialMedia2}
+              onChange={event =>
+                this.setState({ newSocialMedia2: event.target.value })
+              }
+            />
+          </Form.Field>
+
+          <Message error header="Oops!" content={this.state.errorMessage} />
+          <Button loading={this.state.loading} primary style={{ marginLeft: '15px' }}>Update SocialMedia2</Button>
+        </Form>
+      </div>
+    );
+  }
+
+  renderUpdateSocialMedia3() {
+    return (
+      <div style={{ margin: "15px" }}>
+        <Form onSubmit={this.onUpdateSocialMedia3} error={!!this.state.errorMessage}>
+          <Form.Field style={{ margin: '3px 0 0 0', float: 'left', width: '300px' }}>
+            <Input
+              label="New SocialMedia3"
+              size="mini"
+              value={this.state.newSocialMedia3}
+              onChange={event =>
+                this.setState({ newSocialMedia3: event.target.value })
+              }
+            />
+          </Form.Field>
+
+          <Message error header="Oops!" content={this.state.errorMessage} />
+          <Button loading={this.state.loading} primary style={{ marginLeft: '15px' }}>Update SocialMedia3</Button>
         </Form>
       </div>
     );
@@ -299,8 +420,15 @@ class UpdateProfile extends Component {
               </Grid.Column>
 
               <Grid.Column width={12}>
-                {this.renderUpdateName()}
                 {this.renderUpdateRole()}
+                <Divider horizontal></Divider>
+                {this.renderUpdateName()}
+                <Divider horizontal />
+                {this.renderUpdateSocialMedia1()}
+                <Divider horizontal />
+                {this.renderUpdateSocialMedia2()}
+                <Divider horizontal />
+                {this.renderUpdateSocialMedia3()}
               </Grid.Column>
             </Grid.Row>
           </Grid>

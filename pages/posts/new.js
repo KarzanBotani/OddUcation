@@ -178,7 +178,7 @@ class PostNew extends Component {
               </Form.Group>
 
               <Form.Group inline>
-                <label>Post Type: </label>
+                <label>Post Level: </label>
 
                 <Form.Radio
                   label="Introductory"
