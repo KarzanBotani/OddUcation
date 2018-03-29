@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -229,44 +229,50 @@ var Header = function (_Component) {
         borderRadius: 0
       }, _defineProperty(_menuStyle, 'borderRadius', 0), _defineProperty(_menuStyle, 'boxShadow', 'none'), _defineProperty(_menuStyle, 'marginBottom', '1em'), _defineProperty(_menuStyle, 'marginTop', '4em'), _defineProperty(_menuStyle, 'transition', 'box-shadow 0.5s ease, padding 0.5s ease'), _menuStyle);
 
+      var containerStyle = {
+        borderTop: '1px solid black',
+        borderBottom: '1px solid black',
+        fontSize: '1rem'
+      };
+
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Menu"],
         { borderless: true, style: menuStyle, __source: {
             fileName: _jsxFileName,
-            lineNumber: 58
+            lineNumber: 64
           }
         },
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Container"],
-          { text: true, style: { borderTop: '1px solid black', borderBottom: '1px solid black' }, __source: {
+          { text: true, style: containerStyle, __source: {
               fileName: _jsxFileName,
-              lineNumber: 59
+              lineNumber: 65
             }
           },
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Menu"].Item,
             { header: true, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 61
+                lineNumber: 67
               }
             },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
               { route: '/', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 62
+                  lineNumber: 68
                 }
               },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 'a',
                 { className: 'item', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 63
+                    lineNumber: 69
                   }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Icon"], { name: 'book', size: 'large', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 64
+                    lineNumber: 70
                   }
                 }),
                 'OddUcation'
@@ -277,7 +283,7 @@ var Header = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Menu"].Menu,
             { position: 'right', __source: {
                 fileName: _jsxFileName,
-                lineNumber: 70
+                lineNumber: 76
               }
             },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -285,26 +291,26 @@ var Header = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 71
+                  lineNumber: 77
                 }
               },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
                 { route: '/posts/new', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 72
+                    lineNumber: 78
                   }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   'a',
                   { className: 'item', __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 73
+                      lineNumber: 79
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Icon"], { name: 'compose', size: 'large', __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 74
+                      lineNumber: 80
                     }
                   })
                 )
@@ -312,9 +318,9 @@ var Header = function (_Component) {
             ),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Dropdown"],
-              { text: 'Dropdown', className: 'link item', __source: {
+              { text: 'More...', className: 'link item', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 79
+                  lineNumber: 85
                 }
               },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -322,35 +328,9 @@ var Header = function (_Component) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 80
+                    lineNumber: 86
                   }
                 },
-                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                  __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Dropdown"].Item,
-                  {
-                    __source: {
-                      fileName: _jsxFileName,
-                      lineNumber: 81
-                    }
-                  },
-                  __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                    __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
-                    { route: '/posts/all-posts', __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 82
-                      }
-                    },
-                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                      'a',
-                      { className: 'item', __source: {
-                          fileName: _jsxFileName,
-                          lineNumber: 83
-                        }
-                      },
-                      'Posts'
-                    )
-                  )
-                ),
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Dropdown"].Item,
                   {
@@ -361,7 +341,7 @@ var Header = function (_Component) {
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
-                    { route: '/users/all-users', __source: {
+                    { route: '/posts/all-posts', __source: {
                         fileName: _jsxFileName,
                         lineNumber: 88
                       }
@@ -373,7 +353,7 @@ var Header = function (_Component) {
                           lineNumber: 89
                         }
                       },
-                      'Users'
+                      'Posts'
                     )
                   )
                 ),
@@ -387,7 +367,7 @@ var Header = function (_Component) {
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
-                    { route: '/users/all-organizations', __source: {
+                    { route: '/users/all-users', __source: {
                         fileName: _jsxFileName,
                         lineNumber: 94
                       }
@@ -397,6 +377,32 @@ var Header = function (_Component) {
                       { className: 'item', __source: {
                           fileName: _jsxFileName,
                           lineNumber: 95
+                        }
+                      },
+                      'Users'
+                    )
+                  )
+                ),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Dropdown"].Item,
+                  {
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 99
+                    }
+                  },
+                  __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
+                    { route: '/users/all-organizations', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 100
+                      }
+                    },
+                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                      'a',
+                      { className: 'item', __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 101
                         }
                       },
                       'Organizations'
@@ -410,7 +416,7 @@ var Header = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 101
+                  lineNumber: 107
                 }
               },
               this.handleMenu()
@@ -1055,7 +1061,7 @@ module.exports = routes;
 
 /***/ }),
 
-/***/ 11:
+/***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./pages/users/allOrganizations.js");

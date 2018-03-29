@@ -12,47 +12,57 @@ class UserProfile extends Component {
   state = {
     errorMessage: '',
     loading: false,
-    userAddress: '',
-    balance: '0',
-    name: '',
-    role: '',
-    organizationMembersCount: '0',
-    posts: [],
-    userPostsCount: '0',
-    socialMedia1: '',
-    socialMedia2: '',
-    socialMedia3: '',
     postSummaries: []
   }
 
-  async componentDidMount() {
-
+  static async getInitialProps(props) {
     try {
-      const accounts = await web3.eth.getAccounts();
-      const balance = await web3.eth.getBalance(accounts[0]);
-      const profileSummary = await factory.methods.getProfile(accounts[0]).call();
-      const userPostsCount = await factory.methods.userPostsCount(accounts[0]).call();
+      const userAddress = props.query.address;
+      const profileSummary = await factory.methods.getProfile(props.query.address).call();
+      const userPostsCount = await factory.methods.userPostsCount(props.query.address).call();
+      const balance = await web3.eth.getBalance(props.query.address);
+
+      const name = web3.utils.hexToUtf8(profileSummary[1]);
+      const socialMedia1 = web3.utils.hexToUtf8(profileSummary[2][0]);
+      const socialMedia2 = web3.utils.hexToUtf8(profileSummary[2][1]);
+      const socialMedia3 = web3.utils.hexToUtf8(profileSummary[2][2]);
+      let posts = [];
+      posts = profileSummary[3];
+
+      let role;
+      let organizationMembersCount;
 
       if (profileSummary[0] === '1') {
-        this.setState({ role: 'Regular'});
+        role = 'Regular';
       } else if (profileSummary[0] === '2') {
-        this.setState({ role: 'Organization' });
-        this.setState({ organizationMembersCount: profileSummary[4].length });
+        role = 'Organization';
+        organizationMembersCount = profileSummary[4].length;
       }
 
-      this.setState({ userAddress: accounts[0] });
-      this.setState({ balance: balance });
-      this.setState({ name: web3.utils.hexToUtf8(profileSummary[1]) });
-      this.setState({ socialMedia1: web3.utils.hexToUtf8(profileSummary[2][0]) });
-      this.setState({ socialMedia2: web3.utils.hexToUtf8(profileSummary[2][1]) });
-      this.setState({ socialMedia3: web3.utils.hexToUtf8(profileSummary[2][2]) });
-      this.setState({ posts: profileSummary[3] });
-      this.setState({ userPostsCount: userPostsCount });
+      return {
+        userAddress,
+        profileSummary,
+        balance,
+        userPostsCount,
+        name,
+        socialMedia1,
+        socialMedia2,
+        socialMedia3,
+        posts,
+        role,
+        organizationMembersCount,
+      };
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
+  async componentDidMount() {
+    try {
       let postAddresses = [];
       let allSum = [];
 
-      for (let addr of profileSummary[3]) {
+      for (let addr of this.props.posts) {
         let p = Post(addr);
         let o = await p.methods.getPostSummary().call();
 
@@ -63,7 +73,6 @@ class UserProfile extends Component {
       await this.setState({
         postSummaries: { postAddresses, allSum }
       });
-      
     } catch (err) {
       console.log(err)
     }
@@ -71,7 +80,7 @@ class UserProfile extends Component {
 
   renderEssentials() {
     const { Group, Content, Header, Meta, Description } = Card;
-    const { name, role, organizationMembersCount, userPostsCount, balance, socialMedia1, socialMedia2, socialMedia3 } = this.state;
+    const { name, role, organizationMembersCount, userPostsCount, balance, socialMedia1, socialMedia2, socialMedia3 } = this.props;
 
     if (role === 'Organization') {
       return (
@@ -108,7 +117,8 @@ class UserProfile extends Component {
   renderPosts() {
     try {
       const { Group, Content, Header, Meta, Description } = Card;
-      const { postSummaries, userPostsCount } = this.state;
+      const { postSummaries } = this.state;
+      const { userPostsCount } = this.props;
       let q = [];
 
       for (let i = 0; i < userPostsCount; i++) {
@@ -120,7 +130,7 @@ class UserProfile extends Component {
                 <Header>{web3.utils.hexToUtf8(postSummaries.allSum[i][1])}</Header>
                 <Meta>
                   <span style={{ float: 'right' }}>{postSummaries.allSum[i][8]} views</span>
-                  <span>by {this.state.name}</span>
+                  <span>by {this.props.name}</span>
                 </Meta>
                 <Content extra>
                   <span style={{ float: 'right' }}>up: {postSummaries.allSum[i][10]} / down: {postSummaries.allSum[i][11]}</span>
@@ -165,7 +175,7 @@ class UserProfile extends Component {
               <Grid.Column width={4}>
                 {this.renderEssentials()}
 
-                <Link route={`/users/${this.state.userAddress}/update-profile`}>
+                <Link route={`/users/${this.props.userAddress}/update-profile`}>
                   <a className="item">
                     <Button fluid content="Update Profile" icon="setting" primary />
                   </a>
@@ -177,13 +187,13 @@ class UserProfile extends Component {
                   </a>
                 </Link>
 
-                <Link route={`/users/${this.state.userAddress}/add-user`}>
+                <Link route={`/users/${this.props.userAddress}/add-user`}>
                   <a className="item">
                     <Button fluid content="Add User" icon="add user" primary style={{ marginTop: '10px' }} />
                   </a>
                 </Link>
 
-                <Link route={`/users/${this.state.userAddress}/show-users`}>
+                <Link route={`/users/${this.props.userAddress}/show-users`}>
                   <a className="item">
                     <Button fluid content="Show Users" icon="group" primary style={{ marginTop: '10px' }} />
                   </a>

@@ -54,9 +54,15 @@ class Header extends Component {
       transition: 'box-shadow 0.5s ease, padding 0.5s ease',
     };
 
+    const containerStyle = {
+      borderTop: '1px solid black',
+      borderBottom: '1px solid black',
+      fontSize: '1rem'
+    };
+
     return (
       <Menu borderless style={menuStyle}>
-        <Container text style={{ borderTop: '1px solid black', borderBottom: '1px solid black' }}>
+        <Container text style={containerStyle}>
 
           <Menu.Item header>
             <Link route="/">
@@ -76,7 +82,7 @@ class Header extends Component {
               </Link>
             </Menu.Item>
 
-            <Dropdown text='Dropdown' className='link item'>
+            <Dropdown text='More...' className='link item'>
               <Dropdown.Menu>
                 <Dropdown.Item>
                   <Link route="/posts/all-posts">

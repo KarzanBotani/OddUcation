@@ -23,14 +23,13 @@ class PostIndex extends Component {
   // by doing this, 'posts' can be referenced anywhere, because it is now a 'prop'
   static async getInitialProps() {
     const posts = await factory.methods.getDeployedPosts().call();
-
-    return { posts };
+    const usrsAddrs = await factory.methods.getUsers().call();
+    return { posts, usrsAddrs };
   }
 
   async componentDidMount() {
     try {
-
-      this.setState({ postsCount: await factory.methods.postsCount().call() });
+      this.setState({ postsCount: await factory.methods.postsCount().call() }); 
 
       let postAddresses = [];
       let allSum = [];

@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -229,44 +229,50 @@ var Header = function (_Component) {
         borderRadius: 0
       }, _defineProperty(_menuStyle, 'borderRadius', 0), _defineProperty(_menuStyle, 'boxShadow', 'none'), _defineProperty(_menuStyle, 'marginBottom', '1em'), _defineProperty(_menuStyle, 'marginTop', '4em'), _defineProperty(_menuStyle, 'transition', 'box-shadow 0.5s ease, padding 0.5s ease'), _menuStyle);
 
+      var containerStyle = {
+        borderTop: '1px solid black',
+        borderBottom: '1px solid black',
+        fontSize: '1rem'
+      };
+
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Menu"],
         { borderless: true, style: menuStyle, __source: {
             fileName: _jsxFileName,
-            lineNumber: 58
+            lineNumber: 64
           }
         },
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Container"],
-          { text: true, style: { borderTop: '1px solid black', borderBottom: '1px solid black' }, __source: {
+          { text: true, style: containerStyle, __source: {
               fileName: _jsxFileName,
-              lineNumber: 59
+              lineNumber: 65
             }
           },
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Menu"].Item,
             { header: true, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 61
+                lineNumber: 67
               }
             },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
               { route: '/', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 62
+                  lineNumber: 68
                 }
               },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 'a',
                 { className: 'item', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 63
+                    lineNumber: 69
                   }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Icon"], { name: 'book', size: 'large', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 64
+                    lineNumber: 70
                   }
                 }),
                 'OddUcation'
@@ -277,7 +283,7 @@ var Header = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Menu"].Menu,
             { position: 'right', __source: {
                 fileName: _jsxFileName,
-                lineNumber: 70
+                lineNumber: 76
               }
             },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -285,26 +291,26 @@ var Header = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 71
+                  lineNumber: 77
                 }
               },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
                 { route: '/posts/new', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 72
+                    lineNumber: 78
                   }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   'a',
                   { className: 'item', __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 73
+                      lineNumber: 79
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Icon"], { name: 'compose', size: 'large', __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 74
+                      lineNumber: 80
                     }
                   })
                 )
@@ -312,9 +318,9 @@ var Header = function (_Component) {
             ),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Dropdown"],
-              { text: 'Dropdown', className: 'link item', __source: {
+              { text: 'More...', className: 'link item', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 79
+                  lineNumber: 85
                 }
               },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -322,35 +328,9 @@ var Header = function (_Component) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 80
+                    lineNumber: 86
                   }
                 },
-                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                  __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Dropdown"].Item,
-                  {
-                    __source: {
-                      fileName: _jsxFileName,
-                      lineNumber: 81
-                    }
-                  },
-                  __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                    __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
-                    { route: '/posts/all-posts', __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 82
-                      }
-                    },
-                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                      'a',
-                      { className: 'item', __source: {
-                          fileName: _jsxFileName,
-                          lineNumber: 83
-                        }
-                      },
-                      'Posts'
-                    )
-                  )
-                ),
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Dropdown"].Item,
                   {
@@ -361,7 +341,7 @@ var Header = function (_Component) {
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
-                    { route: '/users/all-users', __source: {
+                    { route: '/posts/all-posts', __source: {
                         fileName: _jsxFileName,
                         lineNumber: 88
                       }
@@ -373,7 +353,7 @@ var Header = function (_Component) {
                           lineNumber: 89
                         }
                       },
-                      'Users'
+                      'Posts'
                     )
                   )
                 ),
@@ -387,7 +367,7 @@ var Header = function (_Component) {
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
-                    { route: '/users/all-organizations', __source: {
+                    { route: '/users/all-users', __source: {
                         fileName: _jsxFileName,
                         lineNumber: 94
                       }
@@ -397,6 +377,32 @@ var Header = function (_Component) {
                       { className: 'item', __source: {
                           fileName: _jsxFileName,
                           lineNumber: 95
+                        }
+                      },
+                      'Users'
+                    )
+                  )
+                ),
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Dropdown"].Item,
+                  {
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 99
+                    }
+                  },
+                  __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
+                    { route: '/users/all-organizations', __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 100
+                      }
+                    },
+                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                      'a',
+                      { className: 'item', __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 101
                         }
                       },
                       'Organizations'
@@ -410,7 +416,7 @@ var Header = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 101
+                  lineNumber: 107
                 }
               },
               this.handleMenu()
@@ -638,16 +644,6 @@ var UserProfile = function (_Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = UserProfile.__proto__ || Object.getPrototypeOf(UserProfile)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       errorMessage: '',
       loading: false,
-      userAddress: '',
-      balance: '0',
-      name: '',
-      role: '',
-      organizationMembersCount: '0',
-      posts: [],
-      userPostsCount: '0',
-      socialMedia1: '',
-      socialMedia2: '',
-      socialMedia3: '',
       postSummaries: []
     }, _this.onDeleteAccount = function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(event) {
@@ -704,138 +700,100 @@ var UserProfile = function (_Component) {
     key: "componentDidMount",
     value: function () {
       var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-        var accounts, balance, profileSummary, userPostsCount, postAddresses, allSum, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, addr, p, o;
+        var postAddresses, allSum, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, addr, p, o;
 
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
-                _context2.next = 3;
-                return __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].eth.getAccounts();
-
-              case 3:
-                accounts = _context2.sent;
-                _context2.next = 6;
-                return __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].eth.getBalance(accounts[0]);
-
-              case 6:
-                balance = _context2.sent;
-                _context2.next = 9;
-                return __WEBPACK_IMPORTED_MODULE_4__ethereum_factory__["a" /* default */].methods.getProfile(accounts[0]).call();
-
-              case 9:
-                profileSummary = _context2.sent;
-                _context2.next = 12;
-                return __WEBPACK_IMPORTED_MODULE_4__ethereum_factory__["a" /* default */].methods.userPostsCount(accounts[0]).call();
-
-              case 12:
-                userPostsCount = _context2.sent;
-
-
-                if (profileSummary[0] === '1') {
-                  this.setState({ role: 'Regular' });
-                } else if (profileSummary[0] === '2') {
-                  this.setState({ role: 'Organization' });
-                  this.setState({ organizationMembersCount: profileSummary[4].length });
-                }
-
-                this.setState({ userAddress: accounts[0] });
-                this.setState({ balance: balance });
-                this.setState({ name: __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].utils.hexToUtf8(profileSummary[1]) });
-                this.setState({ socialMedia1: __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].utils.hexToUtf8(profileSummary[2][0]) });
-                this.setState({ socialMedia2: __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].utils.hexToUtf8(profileSummary[2][1]) });
-                this.setState({ socialMedia3: __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].utils.hexToUtf8(profileSummary[2][2]) });
-                this.setState({ posts: profileSummary[3] });
-                this.setState({ userPostsCount: userPostsCount });
-
                 postAddresses = [];
                 allSum = [];
                 _iteratorNormalCompletion = true;
                 _didIteratorError = false;
                 _iteratorError = undefined;
-                _context2.prev = 27;
-                _iterator = profileSummary[3][Symbol.iterator]();
+                _context2.prev = 6;
+                _iterator = this.props.posts[Symbol.iterator]();
 
-              case 29:
+              case 8:
                 if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                  _context2.next = 40;
+                  _context2.next = 19;
                   break;
                 }
 
                 addr = _step.value;
                 p = Object(__WEBPACK_IMPORTED_MODULE_5__ethereum_post__["a" /* default */])(addr);
-                _context2.next = 34;
+                _context2.next = 13;
                 return p.methods.getPostSummary().call();
 
-              case 34:
+              case 13:
                 o = _context2.sent;
 
 
                 postAddresses.push(addr);
                 allSum.push(o);
 
-              case 37:
+              case 16:
                 _iteratorNormalCompletion = true;
-                _context2.next = 29;
+                _context2.next = 8;
                 break;
 
-              case 40:
-                _context2.next = 46;
+              case 19:
+                _context2.next = 25;
                 break;
 
-              case 42:
-                _context2.prev = 42;
-                _context2.t0 = _context2["catch"](27);
+              case 21:
+                _context2.prev = 21;
+                _context2.t0 = _context2["catch"](6);
                 _didIteratorError = true;
                 _iteratorError = _context2.t0;
 
-              case 46:
-                _context2.prev = 46;
-                _context2.prev = 47;
+              case 25:
+                _context2.prev = 25;
+                _context2.prev = 26;
 
                 if (!_iteratorNormalCompletion && _iterator.return) {
                   _iterator.return();
                 }
 
-              case 49:
-                _context2.prev = 49;
+              case 28:
+                _context2.prev = 28;
 
                 if (!_didIteratorError) {
-                  _context2.next = 52;
+                  _context2.next = 31;
                   break;
                 }
 
                 throw _iteratorError;
 
-              case 52:
-                return _context2.finish(49);
+              case 31:
+                return _context2.finish(28);
 
-              case 53:
-                return _context2.finish(46);
+              case 32:
+                return _context2.finish(25);
 
-              case 54:
-                _context2.next = 56;
+              case 33:
+                _context2.next = 35;
                 return this.setState({
                   postSummaries: { postAddresses: postAddresses, allSum: allSum }
                 });
 
-              case 56:
-                _context2.next = 61;
+              case 35:
+                _context2.next = 40;
                 break;
 
-              case 58:
-                _context2.prev = 58;
+              case 37:
+                _context2.prev = 37;
                 _context2.t1 = _context2["catch"](0);
 
                 console.log(_context2.t1);
 
-              case 61:
+              case 40:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[0, 58], [27, 42, 46, 54], [47,, 49, 53]]);
+        }, _callee2, this, [[0, 37], [6, 21, 25, 33], [26,, 28, 32]]);
       }));
 
       function componentDidMount() {
@@ -852,15 +810,15 @@ var UserProfile = function (_Component) {
           Header = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"].Header,
           Meta = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"].Meta,
           Description = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"].Description;
-      var _state = this.state,
-          name = _state.name,
-          role = _state.role,
-          organizationMembersCount = _state.organizationMembersCount,
-          userPostsCount = _state.userPostsCount,
-          balance = _state.balance,
-          socialMedia1 = _state.socialMedia1,
-          socialMedia2 = _state.socialMedia2,
-          socialMedia3 = _state.socialMedia3;
+      var _props = this.props,
+          name = _props.name,
+          role = _props.role,
+          organizationMembersCount = _props.organizationMembersCount,
+          userPostsCount = _props.userPostsCount,
+          balance = _props.balance,
+          socialMedia1 = _props.socialMedia1,
+          socialMedia2 = _props.socialMedia2,
+          socialMedia3 = _props.socialMedia3;
 
 
       if (role === 'Organization') {
@@ -869,7 +827,7 @@ var UserProfile = function (_Component) {
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 78
+              lineNumber: 87
             }
           },
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -877,7 +835,7 @@ var UserProfile = function (_Component) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 79
+                lineNumber: 88
               }
             },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -885,7 +843,7 @@ var UserProfile = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 80
+                  lineNumber: 89
                 }
               },
               name,
@@ -898,7 +856,7 @@ var UserProfile = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 81
+                  lineNumber: 90
                 }
               },
               organizationMembersCount,
@@ -909,7 +867,7 @@ var UserProfile = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 82
+                  lineNumber: 91
                 }
               },
               userPostsCount,
@@ -920,7 +878,7 @@ var UserProfile = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 83
+                  lineNumber: 92
                 }
               },
               "Balance: ",
@@ -931,7 +889,7 @@ var UserProfile = function (_Component) {
               Content,
               { extra: true, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 84
+                  lineNumber: 93
                 }
               },
               socialMedia1
@@ -940,7 +898,7 @@ var UserProfile = function (_Component) {
               Content,
               { extra: true, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 85
+                  lineNumber: 94
                 }
               },
               socialMedia2
@@ -949,7 +907,7 @@ var UserProfile = function (_Component) {
               Content,
               { extra: true, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 86
+                  lineNumber: 95
                 }
               },
               socialMedia3
@@ -961,7 +919,7 @@ var UserProfile = function (_Component) {
           __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"],
           { fluid: true, __source: {
               fileName: _jsxFileName,
-              lineNumber: 94
+              lineNumber: 103
             }
           },
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -969,7 +927,7 @@ var UserProfile = function (_Component) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 95
+                lineNumber: 104
               }
             },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -977,7 +935,7 @@ var UserProfile = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 96
+                  lineNumber: 105
                 }
               },
               name,
@@ -990,7 +948,7 @@ var UserProfile = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 97
+                  lineNumber: 106
                 }
               },
               userPostsCount,
@@ -1001,7 +959,7 @@ var UserProfile = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 98
+                  lineNumber: 107
                 }
               },
               "Balance: ",
@@ -1012,7 +970,7 @@ var UserProfile = function (_Component) {
               Content,
               { extra: true, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 99
+                  lineNumber: 108
                 }
               },
               socialMedia1
@@ -1021,7 +979,7 @@ var UserProfile = function (_Component) {
               Content,
               { extra: true, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 100
+                  lineNumber: 109
                 }
               },
               socialMedia2
@@ -1030,7 +988,7 @@ var UserProfile = function (_Component) {
               Content,
               { extra: true, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 101
+                  lineNumber: 110
                 }
               },
               socialMedia3
@@ -1048,9 +1006,8 @@ var UserProfile = function (_Component) {
             Header = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"].Header,
             Meta = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"].Meta,
             Description = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"].Description;
-        var _state2 = this.state,
-            postSummaries = _state2.postSummaries,
-            userPostsCount = _state2.userPostsCount;
+        var postSummaries = this.state.postSummaries;
+        var userPostsCount = this.props.userPostsCount;
 
         var q = [];
 
@@ -1059,19 +1016,19 @@ var UserProfile = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_7__routes__["Link"],
             { route: "/posts/" + postSummaries.postAddresses[i], __source: {
                 fileName: _jsxFileName,
-                lineNumber: 116
+                lineNumber: 126
               }
             },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"],
               { style: { maxWidth: '240px' }, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 117
+                  lineNumber: 127
                 }
               },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Image"], { src: "https://react.semantic-ui.com/assets/images/wireframe/image.png", __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 118
+                  lineNumber: 128
                 }
               }),
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -1079,7 +1036,7 @@ var UserProfile = function (_Component) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 119
+                    lineNumber: 129
                   }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -1087,7 +1044,7 @@ var UserProfile = function (_Component) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 120
+                      lineNumber: 130
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].utils.hexToUtf8(postSummaries.allSum[i][1])
@@ -1097,14 +1054,14 @@ var UserProfile = function (_Component) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 121
+                      lineNumber: 131
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     "span",
                     { style: { float: 'right' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 122
+                        lineNumber: 132
                       }
                     },
                     postSummaries.allSum[i][8],
@@ -1115,25 +1072,25 @@ var UserProfile = function (_Component) {
                     {
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 123
+                        lineNumber: 133
                       }
                     },
                     "by ",
-                    this.state.name
+                    this.props.name
                   )
                 ),
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   Content,
                   { extra: true, __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 125
+                      lineNumber: 135
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     "span",
                     { style: { float: 'right' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 126
+                        lineNumber: 136
                       }
                     },
                     "up: ",
@@ -1146,7 +1103,7 @@ var UserProfile = function (_Component) {
                     {
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 127
+                        lineNumber: 137
                       }
                     },
                     "uploaded: ",
@@ -1163,7 +1120,7 @@ var UserProfile = function (_Component) {
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 135
+              lineNumber: 145
             }
           },
           q
@@ -1182,7 +1139,7 @@ var UserProfile = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 159
+            lineNumber: 169
           }
         },
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -1190,7 +1147,7 @@ var UserProfile = function (_Component) {
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 160
+              lineNumber: 170
             }
           },
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -1198,7 +1155,7 @@ var UserProfile = function (_Component) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 161
+                lineNumber: 171
               }
             },
             "UserProfile"
@@ -1208,7 +1165,7 @@ var UserProfile = function (_Component) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 163
+                lineNumber: 173
               }
             },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -1216,34 +1173,34 @@ var UserProfile = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 164
+                  lineNumber: 174
                 }
               },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Grid"].Column,
                 { width: 4, __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 165
+                    lineNumber: 175
                   }
                 },
                 this.renderEssentials(),
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_7__routes__["Link"],
-                  { route: "/users/" + this.state.userAddress + "/update-profile", __source: {
+                  { route: "/users/" + this.props.userAddress + "/update-profile", __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 168
+                      lineNumber: 178
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     "a",
                     { className: "item", __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 169
+                        lineNumber: 179
                       }
                     },
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Button"], { fluid: true, content: "Update Profile", icon: "setting", primary: true, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 170
+                        lineNumber: 180
                       }
                     })
                   )
@@ -1252,61 +1209,61 @@ var UserProfile = function (_Component) {
                   __WEBPACK_IMPORTED_MODULE_7__routes__["Link"],
                   { route: "/posts/new", __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 174
+                      lineNumber: 184
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     "a",
                     { className: "item", __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 175
+                        lineNumber: 185
                       }
                     },
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Button"], { fluid: true, content: "Create Post", icon: "compose", primary: true, style: { marginTop: '10px' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 176
+                        lineNumber: 186
                       }
                     })
                   )
                 ),
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_7__routes__["Link"],
-                  { route: "/users/" + this.state.userAddress + "/add-user", __source: {
+                  { route: "/users/" + this.props.userAddress + "/add-user", __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 180
+                      lineNumber: 190
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     "a",
                     { className: "item", __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 181
+                        lineNumber: 191
                       }
                     },
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Button"], { fluid: true, content: "Add User", icon: "add user", primary: true, style: { marginTop: '10px' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 182
+                        lineNumber: 192
                       }
                     })
                   )
                 ),
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_7__routes__["Link"],
-                  { route: "/users/" + this.state.userAddress + "/show-users", __source: {
+                  { route: "/users/" + this.props.userAddress + "/show-users", __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 186
+                      lineNumber: 196
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     "a",
                     { className: "item", __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 187
+                        lineNumber: 197
                       }
                     },
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Button"], { fluid: true, content: "Show Users", icon: "group", primary: true, style: { marginTop: '10px' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 188
+                        lineNumber: 198
                       }
                     })
                   )
@@ -1316,7 +1273,7 @@ var UserProfile = function (_Component) {
                   }, loading: this.state.loading,
                   content: "Delete Account", icon: "user delete", negative: true, style: { marginTop: '10px' }, __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 192
+                    lineNumber: 202
                   }
                 })
               ),
@@ -1324,7 +1281,7 @@ var UserProfile = function (_Component) {
                 __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Grid"].Column,
                 { width: 12, __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 196
+                    lineNumber: 206
                   }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -1332,7 +1289,7 @@ var UserProfile = function (_Component) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 197
+                      lineNumber: 207
                     }
                   },
                   "My Posts:"
@@ -1344,6 +1301,85 @@ var UserProfile = function (_Component) {
         )
       );
     }
+  }], [{
+    key: "getInitialProps",
+    value: function () {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(props) {
+        var userAddress, profileSummary, userPostsCount, balance, name, socialMedia1, socialMedia2, socialMedia3, posts, role, organizationMembersCount;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                userAddress = props.query.address;
+                _context3.next = 4;
+                return __WEBPACK_IMPORTED_MODULE_4__ethereum_factory__["a" /* default */].methods.getProfile(props.query.address).call();
+
+              case 4:
+                profileSummary = _context3.sent;
+                _context3.next = 7;
+                return __WEBPACK_IMPORTED_MODULE_4__ethereum_factory__["a" /* default */].methods.userPostsCount(props.query.address).call();
+
+              case 7:
+                userPostsCount = _context3.sent;
+                _context3.next = 10;
+                return __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].eth.getBalance(props.query.address);
+
+              case 10:
+                balance = _context3.sent;
+                name = __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].utils.hexToUtf8(profileSummary[1]);
+                socialMedia1 = __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].utils.hexToUtf8(profileSummary[2][0]);
+                socialMedia2 = __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].utils.hexToUtf8(profileSummary[2][1]);
+                socialMedia3 = __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].utils.hexToUtf8(profileSummary[2][2]);
+                posts = [];
+
+                posts = profileSummary[3];
+
+                role = void 0;
+                organizationMembersCount = void 0;
+
+
+                if (profileSummary[0] === '1') {
+                  role = 'Regular';
+                } else if (profileSummary[0] === '2') {
+                  role = 'Organization';
+                  organizationMembersCount = profileSummary[4].length;
+                }
+
+                return _context3.abrupt("return", {
+                  userAddress: userAddress,
+                  profileSummary: profileSummary,
+                  balance: balance,
+                  userPostsCount: userPostsCount,
+                  name: name,
+                  socialMedia1: socialMedia1,
+                  socialMedia2: socialMedia2,
+                  socialMedia3: socialMedia3,
+                  posts: posts,
+                  role: role,
+                  organizationMembersCount: organizationMembersCount
+                });
+
+              case 23:
+                _context3.prev = 23;
+                _context3.t0 = _context3["catch"](0);
+
+                console.log(_context3.t0);
+
+              case 26:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this, [[0, 23]]);
+      }));
+
+      function getInitialProps(_x2) {
+        return _ref4.apply(this, arguments);
+      }
+
+      return getInitialProps;
+    }()
   }]);
 
   return UserProfile;
@@ -1369,7 +1405,7 @@ module.exports = routes;
 
 /***/ }),
 
-/***/ 5:
+/***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./pages/users/profile.js");
