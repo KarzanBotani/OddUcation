@@ -132,6 +132,10 @@ contract Authentication is Destructible {
   
     emit OnSignup(msg.sender, uint256(user.role));
   }
+
+  function getUsers() public view returns (address[]) {
+    return usersArray;
+  }
   
   function getProfile(address _userAddress) public view isUser(_userAddress) returns(uint256, bytes32, bytes32[3], address[], address[]) {
     User memory user = users[_userAddress];

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, Divider, Grid, Table, Icon, Image, Message } from 'semantic-ui-react';
+import { Advertisement, Container, Button, Card, Divider, Grid, Table, Icon, Image, Message } from 'semantic-ui-react';
 import factory from '../ethereum/factory'; // import factory instance
 import Post from '../ethereum/post';
 import Layout from '../components/general/Layout';
@@ -13,7 +13,8 @@ class PostIndex extends Component {
     errorMessage: '',
     loading: false,
     postSummaries: [],
-    postsCount: ''
+    postsCount: '',
+    ownerName: ''
   };
 
   // getInitialProps is required by next. next wants to  get the data without having to render the component.
@@ -33,20 +34,22 @@ class PostIndex extends Component {
 
       let postAddresses = [];
       let allSum = [];
+      let ownerNames = [];
       let postsCount;
 
       for (let addr of this.props.posts) {
         let p = Post(addr);
         let o = await p.methods.getPostSummary().call();
+        let n = await factory.methods.getProfile(o[0]).call();
 
         postAddresses.push(addr);
         allSum.push(o);
+        ownerNames.push(n[1]);
       }
 
       await this.setState({ 
-        postSummaries: { postAddresses, allSum }
+        postSummaries: { postAddresses, allSum, ownerNames }
       });
-
     } catch (err) {
       console.log(err);
     }
@@ -61,17 +64,17 @@ class PostIndex extends Component {
       for (let i = 0; i < postsCount; i++) {
         q[i] =
           <Link route={`/posts/${postSummaries.postAddresses[i]}`}>
-            <Card style={{ maxWidth: '240px' }}>
+            <Card>
               <Image src='https://react.semantic-ui.com/assets/images/wireframe/image.png' />
               <Content>
-                <Header>{web3.utils.toAscii(postSummaries.allSum[i][1])}</Header>
+                <Header>{web3.utils.hexToUtf8(postSummaries.allSum[i][1])}</Header>
                 <Meta>
                   <span style={{ float: 'right' }}>{postSummaries.allSum[i][8]} views</span>
-                  <span>by {this.state.name}</span>
+                  <span>by {web3.utils.hexToUtf8(postSummaries.ownerNames[i])}</span>
                 </Meta>
                 <Content extra>
                   <span style={{ float: 'right' }}>up: {postSummaries.allSum[i][10]} / down: {postSummaries.allSum[i][11]}</span>
-                  <span>date: {postSummaries.allSum[i][6]}</span>
+                  <span>uploaded: {postSummaries.allSum[i][6]}</span>
                 </Content>
               </Content>
             </Card>
@@ -79,7 +82,21 @@ class PostIndex extends Component {
         ;
       }
 
-      return <Group>{q}</Group>;
+      return (
+        <Grid columns={3}>
+          <Grid.Row>
+            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[0]}</Grid.Column>
+            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[1]}</Grid.Column>
+            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[2]}</Grid.Column>
+          </Grid.Row>
+
+          <Grid.Row>
+            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[3]}</Grid.Column>
+            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[4]}</Grid.Column>
+            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[5]}</Grid.Column>
+          </Grid.Row>
+        </Grid>
+      );
     } catch (err) {
       console.log(err);
     }
@@ -90,11 +107,10 @@ class PostIndex extends Component {
 
     return (
       <Layout>
-        <Grid relaxed>
-          <Row>
-            <Column>{this.renderPosts()}</Column>
-          </Row>
-        </Grid>
+        <Advertisement style={{ width: '100%', backgroundColor: 'red' }} unit='large leaderboard' test='Splash text' />
+        <Container>
+          {this.renderPosts()}
+        </Container>
       </Layout>
     )
   }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Card, Form, Grid, Input, Message, Table, Icon } from 'semantic-ui-react';
+import { Container, Button, Card, Form, Grid, Input, Message, Table, Icon } from 'semantic-ui-react';
 import Layout from "../../components/general/Layout";
 import factory from '../../ethereum/factory'; // import factory instance
 import web3 from '../../ethereum/web3';
@@ -101,7 +101,7 @@ class ShowMembers extends Component {
 
       Router.pushRoute('/');
     } catch (err) {
-      console.log('err: ', err);
+      this.setState({ errorMessage: err.message });
     }
 
     this.setState({ loading: false });
@@ -117,7 +117,6 @@ class ShowMembers extends Component {
       Router.pushRoute(`/users/${this.state.userAddress}/add-user`);
     } catch (err) {
       this.setState({ errorMessage: err.message });
-      console.log(err.message);
     }
 
     this.setState({ loading: false });
@@ -134,7 +133,7 @@ class ShowMembers extends Component {
           <Cell>
             <Link route={`/users/${memberInfo.memberIds[i]}`}>
               <a className="item">
-                {web3.utils.toAscii(memberInfo.memberProfiles[i][1])}
+                {web3.utils.hexToUtf8(memberInfo.memberProfiles[i][1])}
               </a>
             </Link>
           </Cell>
@@ -165,58 +164,67 @@ class ShowMembers extends Component {
     return (
       <Layout>
 
-        <Link route={`/users/${this.state.userAddress}`}>
-          <a className="item">Back</a>
-        </Link>
+        <Container>
 
-        <h3>ShowUsers</h3>
+          <Link route={`/users/${this.state.userAddress}`}>
+            <a className="item">Back</a>
+          </Link>
 
-        <Grid>
-          <Grid.Row>
-            <Grid.Column width={4}>
-              {this.renderEssentials()}
+          <h3>ShowUsers</h3>
 
-              <Link route="/posts/new">
-                <a className="item">
-                  <Button fluid content="Create Post" icon="compose" primary />
-                </a>
-              </Link>
+          <Grid>
+            <Grid.Row>
+              <Grid.Column width={4}>
+                {this.renderEssentials()}
 
-              <Link route={`/users/${this.state.userAddress}/add-user`}>
-                <a className="item">
-                  <Button fluid content="Add User" icon="add user" primary style={{ marginTop: '10px' }} />
-                </a>
-              </Link>
+                <Link route={`/users/${this.state.userAddress}/update-profile`}>
+                  <a className="item">
+                    <Button fluid content="Update Profile" icon="setting" primary />
+                  </a>
+                </Link>
 
-              <Link route={`/users/${this.state.userAddress}/show-users`}>
-                <a className="item">
-                  <Button fluid content="Show Users" icon="group" primary style={{ marginTop: '10px' }} />
-                </a>
-              </Link>
+                <Link route="/posts/new">
+                  <a className="item">
+                    <Button fluid content="Create Post" icon="compose" primary style={{ marginTop: '10px' }} />
+                  </a>
+                </Link>
 
-              <Button fluid onClick={event => this.onDeleteAccount(event)} loading={this.state.loading}
-              content="Delete Account" icon="user delete" negative style={{ marginTop: '10px' }} />
-              
-            </Grid.Column>
+                <Link route={`/users/${this.state.userAddress}/add-user`}>
+                  <a className="item">
+                    <Button fluid content="Add User" icon="add user" primary style={{ marginTop: '10px' }} />
+                  </a>
+                </Link>
 
-            <Grid.Column width={12}>
+                <Link route={`/users/${this.state.userAddress}/show-users`}>
+                  <a className="item">
+                    <Button fluid content="Show Users" icon="group" primary style={{ marginTop: '10px' }} />
+                  </a>
+                </Link>
 
-              <Table celled striped>
-                <Header>
-                  <Row>
-                    <HeaderCell>Address</HeaderCell>
-                    <HeaderCell>Name</HeaderCell>
-                    <HeaderCell colSpan='2'>Posts Count</HeaderCell>
-                  </Row>
-                </Header>
-
-                <Body>{this.renderMembers()}</Body>
+                <Button fluid onClick={event => this.onDeleteAccount(event)} loading={this.state.loading}
+                content="Delete Account" icon="user delete" negative style={{ marginTop: '10px' }} />
                 
-              </Table>
+              </Grid.Column>
 
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+              <Grid.Column width={12}>
+
+                <Table celled striped>
+                  <Header>
+                    <Row>
+                      <HeaderCell>Address</HeaderCell>
+                      <HeaderCell>Name</HeaderCell>
+                      <HeaderCell colSpan='2'>Posts Count</HeaderCell>
+                    </Row>
+                  </Header>
+
+                  <Body>{this.renderMembers()}</Body>
+                  
+                </Table>
+
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Container>
       </Layout>
     );
   };

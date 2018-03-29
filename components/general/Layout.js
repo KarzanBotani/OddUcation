@@ -6,7 +6,7 @@ import Header from './Header';
 // functional components get called with 'props'
 export default (props) => {
   return (
-    <Container style={{ marginBottom: '20px' }}>
+    <Container fluid>
       <Head>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css" />
       </Head>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Card, Divider, Grid, Table, Icon, Image, Message } from 'semantic-ui-react';
+import { Container, Button, Card, Divider, Grid, Table, Icon, Image, Message } from 'semantic-ui-react';
 import Layout from "../../components/general/Layout";
 import factory from '../../ethereum/factory'; // import factory instance
 import Post from "../../ethereum/post"; // not construct (capital P)
@@ -117,14 +117,14 @@ class UserProfile extends Component {
             <Card style={{ maxWidth: '240px' }}>
               <Image src='https://react.semantic-ui.com/assets/images/wireframe/image.png' />
               <Content>
-                <Header>{web3.utils.toAscii(postSummaries.allSum[i][1])}</Header>
+                <Header>{web3.utils.hexToUtf8(postSummaries.allSum[i][1])}</Header>
                 <Meta>
                   <span style={{ float: 'right' }}>{postSummaries.allSum[i][8]} views</span>
                   <span>by {this.state.name}</span>
                 </Meta>
                 <Content extra>
                   <span style={{ float: 'right' }}>up: {postSummaries.allSum[i][10]} / down: {postSummaries.allSum[i][11]}</span>
-                  <span>date: {postSummaries.allSum[i][6]}</span>
+                  <span>uploaded: {postSummaries.allSum[i][6]}</span>
                 </Content>
               </Content>
             </Card>
@@ -148,7 +148,7 @@ class UserProfile extends Component {
       
       Router.pushRoute('/');
     } catch (err) {
-      console.log('err: ', err);
+      this.setState({ errorMessage: err.message });
     }
 
     this.setState({ loading: false });
@@ -157,42 +157,50 @@ class UserProfile extends Component {
   render() {
     return (
       <Layout>
-        <h3>UserProfile</h3>
+        <Container>
+          <h3>UserProfile</h3>
 
-        <Grid>
-          <Grid.Row>
-            <Grid.Column width={4}>
-              {this.renderEssentials()}
+          <Grid>
+            <Grid.Row>
+              <Grid.Column width={4}>
+                {this.renderEssentials()}
 
-              <Link route="/posts/new">
-                <a className="item">
-                  <Button fluid content="Create Post" icon="compose" primary />
-                </a>
-              </Link>
+                <Link route={`/users/${this.state.userAddress}/update-profile`}>
+                  <a className="item">
+                    <Button fluid content="Update Profile" icon="setting" primary />
+                  </a>
+                </Link>
 
-              <Link route={`/users/${this.state.userAddress}/add-user`}>
-                <a className="item">
-                  <Button fluid content="Add User" icon="add user" primary style={{ marginTop: '10px' }} />
-                </a>
-              </Link>
+                <Link route="/posts/new">
+                  <a className="item">
+                    <Button fluid content="Create Post" icon="compose" primary style={{ marginTop: '10px' }} />
+                  </a>
+                </Link>
 
-              <Link route={`/users/${this.state.userAddress}/show-users`}>
-                <a className="item">
-                  <Button fluid content="Show Users" icon="group" primary style={{ marginTop: '10px' }} />
-                </a>
-              </Link>
+                <Link route={`/users/${this.state.userAddress}/add-user`}>
+                  <a className="item">
+                    <Button fluid content="Add User" icon="add user" primary style={{ marginTop: '10px' }} />
+                  </a>
+                </Link>
 
-              <Button fluid onClick={event => this.onDeleteAccount(event)} loading={this.state.loading}
-              content="Delete Account" icon="user delete" negative style={{ marginTop: '10px' }} />
-            </Grid.Column>
+                <Link route={`/users/${this.state.userAddress}/show-users`}>
+                  <a className="item">
+                    <Button fluid content="Show Users" icon="group" primary style={{ marginTop: '10px' }} />
+                  </a>
+                </Link>
 
-            <Grid.Column width={12}>
-              <h3>My Posts:</h3>
-              {this.renderPosts()}
-            </Grid.Column>
+                <Button fluid onClick={event => this.onDeleteAccount(event)} loading={this.state.loading}
+                content="Delete Account" icon="user delete" negative style={{ marginTop: '10px' }} />
+              </Grid.Column>
 
-          </Grid.Row>
-        </Grid>
+              <Grid.Column width={12}>
+                <h3>My Posts:</h3>
+                {this.renderPosts()}
+              </Grid.Column>
+
+            </Grid.Row>
+          </Grid>
+        </Container>
       </Layout>
     );
   };

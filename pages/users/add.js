@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Card, Form, Grid, Input, Message, Icon } from 'semantic-ui-react';
+import { Container, Button, Card, Form, Grid, Input, Message, Icon } from 'semantic-ui-react';
 import Layout from "../../components/general/Layout";
 import factory from '../../ethereum/factory'; // import factory instance
 import web3 from '../../ethereum/web3';
@@ -105,56 +105,64 @@ class AddUser extends Component {
   render() {
     return (
       <Layout>
+        <Container>
 
-        <Link route={`/users/${this.state.userAddress}`}>
-          <a className="item">Back</a>
-        </Link>
+          <Link route={`/users/${this.state.userAddress}`}>
+            <a className="item">Back</a>
+          </Link>
 
-        <h3>AddUser</h3>
+          <h3>AddUser</h3>
 
-        <Grid>
-          <Grid.Row>
-            <Grid.Column width={4}>
-              {this.renderEssentials()}
+          <Grid>
+            <Grid.Row>
+              <Grid.Column width={4}>
+                {this.renderEssentials()}
 
-              <Link route="/posts/new">
-                <a className="item">
-                  <Button fluid content="Create Post" icon="compose" primary />
-                </a>
-              </Link>
+                <Link route={`/users/${this.state.userAddress}/update-profile`}>
+                  <a className="item">
+                    <Button fluid content="Update Profile" icon="setting" primary />
+                  </a>
+                </Link>
 
-              <Link route={`/users/${this.state.userAddress}/add-user`}>
-                <a className="item">
-                  <Button fluid content="Add User" icon="add user" primary style={{ marginTop: '10px' }} />
-                </a>
-              </Link>
+                <Link route="/posts/new">
+                  <a className="item">
+                    <Button fluid content="Create Post" icon="compose" primary style={{ marginTop: '10px' }} />
+                  </a>
+                </Link>
 
-              <Link route={`/users/${this.state.userAddress}/show-users`}>
-                <a className="item">
-                  <Button fluid content="Show Users" icon="group" primary style={{ marginTop: '10px' }} />
-                </a>
-              </Link>
+                <Link route={`/users/${this.state.userAddress}/add-user`}>
+                  <a className="item">
+                    <Button fluid content="Add User" icon="add user" primary style={{ marginTop: '10px' }} />
+                  </a>
+                </Link>
 
-              <Button fluid onClick={event => this.onDeleteAccount(event)} loading={this.state.loading}
-              content="Delete Account" icon="user delete" negative style={{ marginTop: '10px' }} />
-              
-            </Grid.Column>
+                <Link route={`/users/${this.state.userAddress}/show-users`}>
+                  <a className="item">
+                    <Button fluid content="Show Users" icon="group" primary style={{ marginTop: '10px' }} />
+                  </a>
+                </Link>
 
-            <Grid.Column width={12}>
+                <Button fluid onClick={event => this.onDeleteAccount(event)} loading={this.state.loading}
+                content="Delete Account" icon="user delete" negative style={{ marginTop: '10px' }} />
+                
+              </Grid.Column>
 
-              <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
-                <Form.Field>
-                  <Input label="User Address" size="mini" value={this.state.addressToAdd}
-                    onChange={event => this.setState({ addressToAdd: event.target.value })} />
-                </Form.Field>
+              <Grid.Column width={12}>
 
-                <Message error header="Oops!" content={this.state.errorMessage} />
-                <Button loading={this.state.loading} primary>Add</Button>
-              </Form>
+                <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
+                  <Form.Field>
+                    <Input label="User Address" size="mini" value={this.state.addressToAdd}
+                      onChange={event => this.setState({ addressToAdd: event.target.value })} />
+                  </Form.Field>
 
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+                  <Message error header="Oops!" content={this.state.errorMessage} />
+                  <Button loading={this.state.loading} primary>Add</Button>
+                </Form>
+
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Container>
       </Layout>
     );
   };

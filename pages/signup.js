@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, Input, Message } from "semantic-ui-react";
+import { Container, Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import Layout from "../components/general/Layout";
 import factory from "../ethereum/factory";
 import web3 from "../ethereum/web3";
@@ -46,36 +46,56 @@ class Signup extends Component {
   render() {
     return (
       <Layout>
-        <h3>signup</h3>
+        <Container className='login-form'>
 
-        <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
-          <Form.Input
-            fluid
-            label="Name"
-            value={this.state.accountName}
-            onChange={event => this.setState({ accountName: event.target.value }) }
-          />
+          <style>{`
+            #__next-error { display: none; }
+            body { overflow: hidden; }
+            body > div,
+            body > div > div,
+            body > div > div > div.login-form {
+              height: 100%;
+            }
+          `}</style>
 
-          <Form.Group inline>
-            <Form.Radio
-              label="Regular"
-              name="accountType"
-              checked={this.state.accountType === 1}
-              onChange={event => this.setState({accountType: 1})}
-            />
-            <Form.Radio
-              label="Organization"
-              name="accountType"
-              checked={this.state.accountType === 2}
-              onChange={event => this.setState({accountType: 2})}
-            />
-          </Form.Group>
+          <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
+            <Grid.Column style={{ maxWidth: 450 }}>
+              <Header as='h2' color='teal' textAlign='center'>Signup</Header>
 
-          <Message error header="Oops!" content={this.state.errorMessage} />
-          <Button loading={this.state.loading} primary>
-            Signup
-          </Button>
-        </Form>
+              <Form size='large' onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
+                <Segment stacked>
+
+                  <Form.Input
+                    fluid
+                    icon='user'
+                    iconPosition='left'
+                    placeholder='Name'
+                    value={this.state.accountName}
+                    onChange={event => this.setState({ accountName: event.target.value }) }
+                  />
+
+                  <Form.Group fluid='true'>
+                    <Form.Radio
+                      label="Regular"
+                      name="accountType"
+                      checked={this.state.accountType === 1}
+                      onChange={event => this.setState({ accountType: 1 })}
+                    />
+                    <Form.Radio
+                      label="Organization"
+                      name="accountType"
+                      checked={this.state.accountType === 2}
+                      onChange={event => this.setState( {accountType: 2 })}
+                    />
+                  </Form.Group>
+
+                  <Message error header="Oops!" content={this.state.errorMessage} />
+                  <Button color='teal' fluid size='large' loading={this.state.loading}>Signup</Button>
+                </Segment>
+              </Form>
+            </Grid.Column>
+          </Grid>
+        </Container>
       </Layout>
     );
   }

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Card, Grid, Table, Input } from "semantic-ui-react";
+import { Container, Card, Grid, Table, Input } from "semantic-ui-react";
 import Layout from "../../components/general/Layout";
 import IncreasePoolForm from "../../components/posts/IncreasePoolForm";
 import Vote from "../../components/posts/Vote";
+import ViewPost from "../../components/posts/ViewPost";
 import factory from "../../ethereum/factory";
 import Post from "../../ethereum/post"; // not construct (capital P)
 import web3 from "../../ethereum/web3";
@@ -24,10 +25,10 @@ class PostShow extends Component {
       address: props.query.address,
       owner: summary[0],
       ownerName: n[1],
-      title: web3.utils.toAscii(summary[1]),
-      description: web3.utils.toAscii(summary[2]),
+      title: web3.utils.hexToUtf8(summary[1]),
+      description: web3.utils.hexToUtf8(summary[2]),
       contentHash: summary[3],
-      language: web3.utils.toAscii(summary[4]),
+      language: web3.utils.hexToUtf8(summary[4]),
       postBalance: summary[5],
       date: summary[6],
       length: summary[7],
@@ -198,26 +199,35 @@ class PostShow extends Component {
   render() {
     return (
       <Layout>
-        <h3>{this.props.title}</h3>
+        <Container>
+          <h3>{this.props.title}</h3>
 
-        <Grid>
-          <Grid.Row>
-            <Grid.Column width={10}>
-              <Card fluid>
-                <Card.Content header="Description:" />
-                <Card.Content
-                  description="Lorem ipsum dolor sit amet, cu harum tollit temporibus nec, no solum melius quaerendum cum. Id soleat postea pro. Accumsan sapientem mei at, ne dicat nonumy sanctus sea. Fuisset atomorum eu qui. Nostro nominavi salutandi ut mei, ludus epicurei evertitur cu cum. Illum scribentur ad sit, ad per facer eligendi. Cum te idque blandit postulant, at minim verterem erroribus nam, choro platonem ius ut. Graeco quaestio ea mei. Nam wisi albucius hendrerit ei, mel cu ferri ignota phaedrum. Eu mei tollit mollis referrentur. Eum id viderer reprimique. Eos ex alia enim omittantur, mazim melius posidonium at nam. Ut his tantas mucius. Ne modo singulis intellegebat his. Ne vis porro adipisci perpetua, vel ludus salutatus cu."
-                />
-              </Card>
-            </Grid.Column>
+          <Grid>
+            <Grid.Row>
+              <ViewPost address={this.props.address} />
+            </Grid.Row>
 
-            <Grid.Column width={6}>
+            <Grid.Row>
               <Vote address={this.props.address} />
-              <IncreasePoolForm address={this.props.address} />
-              {this.renderTables()}
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+            </Grid.Row>
+
+            <Grid.Row>
+              <Grid.Column width={10}>
+                <Card fluid>
+                  <Card.Content header="Description:" />
+                  <Card.Content
+                    description="Lorem ipsum dolor sit amet, cu harum tollit temporibus nec, no solum melius quaerendum cum. Id soleat postea pro. Accumsan sapientem mei at, ne dicat nonumy sanctus sea. Fuisset atomorum eu qui. Nostro nominavi salutandi ut mei, ludus epicurei evertitur cu cum. Illum scribentur ad sit, ad per facer eligendi. Cum te idque blandit postulant, at minim verterem erroribus nam, choro platonem ius ut. Graeco quaestio ea mei. Nam wisi albucius hendrerit ei, mel cu ferri ignota phaedrum. Eu mei tollit mollis referrentur. Eum id viderer reprimique. Eos ex alia enim omittantur, mazim melius posidonium at nam. Ut his tantas mucius. Ne modo singulis intellegebat his. Ne vis porro adipisci perpetua, vel ludus salutatus cu."
+                  />
+                </Card>
+              </Grid.Column>
+
+              <Grid.Column width={6}>
+                <IncreasePoolForm address={this.props.address} />
+                {this.renderTables()}
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Container>
       </Layout>
     );
   }

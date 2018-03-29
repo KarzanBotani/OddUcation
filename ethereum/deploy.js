@@ -27,7 +27,7 @@ const HDWalletProvider = require('truffle-hdwallet-provider'),
 			Web3 = require('web3'),
 			compiledFactory = require('./build/Factory.json');
 
-let mnemonic = 'sea success hidden trophy scale flock surround ceiling mosquito ask bachelor tenant',
+let mnemonic = 'salute lobster drift business million vendor unable vapor ankle prison wealth employ',
 		network = 'https://rinkeby.infura.io/gjdTq0bMOY1RgmwUAci4';
 
 const provider = new HDWalletProvider(mnemonic, network),
@@ -43,7 +43,7 @@ const deploy = async () => {
 	// result = instance of contract
 	const result = await new web3.eth.Contract(JSON.parse(compiledFactory.interface))
 		.deploy({ data: compiledFactory.bytecode })
-		.send({ from: accounts[0], gas: '9999999999' });
+		.send({ from: accounts[0], gas: '5000000' });
 
 	// record the address where the contract is deployed
 	console.log('Contract deployed to: ', result.options.address);
