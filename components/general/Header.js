@@ -60,6 +60,14 @@ class Header extends Component {
       fontSize: '1rem'
     };
 
+    const dropdownItemStyle = {
+      padding: '0px !important'
+    };
+
+    const dropdownLinkStyle = {
+      padding: '24px 32px 24px 31px'
+    };
+
     return (
       <Menu borderless style={menuStyle}>
         <Container text style={containerStyle}>
@@ -84,21 +92,21 @@ class Header extends Component {
 
             <Dropdown text='More...' className='link item'>
               <Dropdown.Menu>
-                <Dropdown.Item>
+                <Dropdown.Item style={dropdownItemStyle}>
                   <Link route="/posts/all-posts">
-                    <a className="item">Posts</a>
+                    <a className="item" style={dropdownLinkStyle}>Posts</a>
                   </Link>
                 </Dropdown.Item>
 
-                <Dropdown.Item>
+                <Dropdown.Item style={dropdownItemStyle}>
                   <Link route="/users/all-users">
-                    <a className="item">Users</a>
+                    <a className="item" style={dropdownLinkStyle}>Users</a>
                   </Link>
                 </Dropdown.Item>
 
-                <Dropdown.Item>
+                <Dropdown.Item style={dropdownItemStyle}>
                   <Link route="/users/all-organizations">
-                    <a className="item">Organizations</a>
+                    <a className="item" style={dropdownLinkStyle}>Organizations</a>
                   </Link>
                 </Dropdown.Item>
               </Dropdown.Menu>

@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -235,44 +235,52 @@ var Header = function (_Component) {
         fontSize: '1rem'
       };
 
+      var dropdownItemStyle = {
+        padding: '0px !important'
+      };
+
+      var dropdownLinkStyle = {
+        padding: '24px 32px 24px 31px'
+      };
+
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Menu"],
         { borderless: true, style: menuStyle, __source: {
             fileName: _jsxFileName,
-            lineNumber: 64
+            lineNumber: 72
           }
         },
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Container"],
           { text: true, style: containerStyle, __source: {
               fileName: _jsxFileName,
-              lineNumber: 65
+              lineNumber: 73
             }
           },
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Menu"].Item,
             { header: true, __source: {
                 fileName: _jsxFileName,
-                lineNumber: 67
+                lineNumber: 75
               }
             },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
               { route: '/', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 68
+                  lineNumber: 76
                 }
               },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 'a',
                 { className: 'item', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 69
+                    lineNumber: 77
                   }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Icon"], { name: 'book', size: 'large', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 70
+                    lineNumber: 78
                   }
                 }),
                 'OddUcation'
@@ -283,7 +291,7 @@ var Header = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Menu"].Menu,
             { position: 'right', __source: {
                 fileName: _jsxFileName,
-                lineNumber: 76
+                lineNumber: 84
               }
             },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -291,26 +299,26 @@ var Header = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 77
+                  lineNumber: 85
                 }
               },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
                 { route: '/posts/new', __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 78
+                    lineNumber: 86
                   }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   'a',
                   { className: 'item', __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 79
+                      lineNumber: 87
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Icon"], { name: 'compose', size: 'large', __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 80
+                      lineNumber: 88
                     }
                   })
                 )
@@ -320,7 +328,7 @@ var Header = function (_Component) {
               __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Dropdown"],
               { text: 'More...', className: 'link item', __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 85
+                  lineNumber: 93
                 }
               },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -328,29 +336,28 @@ var Header = function (_Component) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 86
+                    lineNumber: 94
                   }
                 },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Dropdown"].Item,
-                  {
-                    __source: {
+                  { style: dropdownItemStyle, __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 87
+                      lineNumber: 95
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
                     { route: '/posts/all-posts', __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 88
+                        lineNumber: 96
                       }
                     },
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                       'a',
-                      { className: 'item', __source: {
+                      { className: 'item', style: dropdownLinkStyle, __source: {
                           fileName: _jsxFileName,
-                          lineNumber: 89
+                          lineNumber: 97
                         }
                       },
                       'Posts'
@@ -359,24 +366,23 @@ var Header = function (_Component) {
                 ),
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Dropdown"].Item,
-                  {
-                    __source: {
+                  { style: dropdownItemStyle, __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 93
+                      lineNumber: 101
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
                     { route: '/users/all-users', __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 94
+                        lineNumber: 102
                       }
                     },
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                       'a',
-                      { className: 'item', __source: {
+                      { className: 'item', style: dropdownLinkStyle, __source: {
                           fileName: _jsxFileName,
-                          lineNumber: 95
+                          lineNumber: 103
                         }
                       },
                       'Users'
@@ -385,24 +391,23 @@ var Header = function (_Component) {
                 ),
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Dropdown"].Item,
-                  {
-                    __source: {
+                  { style: dropdownItemStyle, __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 99
+                      lineNumber: 107
                     }
                   },
                   __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                     __WEBPACK_IMPORTED_MODULE_3__routes__["Link"],
                     { route: '/users/all-organizations', __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 100
+                        lineNumber: 108
                       }
                     },
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                       'a',
-                      { className: 'item', __source: {
+                      { className: 'item', style: dropdownLinkStyle, __source: {
                           fileName: _jsxFileName,
-                          lineNumber: 101
+                          lineNumber: 109
                         }
                       },
                       'Organizations'
@@ -416,7 +421,7 @@ var Header = function (_Component) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 107
+                  lineNumber: 115
                 }
               },
               this.handleMenu()
@@ -1074,7 +1079,7 @@ module.exports = routes;
 
 /***/ }),
 
-/***/ 3:
+/***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./pages/index.js");
