@@ -28,11 +28,11 @@ class ViewPost extends Component {
 
   render() {
     return (
-      <Grid.Column width={16} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Grid.Column width={16} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: "0px" }}>
         <video
           onPlay={() => this.onViewPost()}
           loading={this.state.loading}
-          style={{ width: "75%" }}
+          style={{ width: "100%" }}
           controls
           src={
             "https://s3.amazonaws.com/codecademy-content/courses/React/react_video-eek.mp4"

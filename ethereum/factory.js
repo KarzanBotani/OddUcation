@@ -5,7 +5,7 @@ import Factory from './build/Factory.json';
 // create instance of Factory
 const instance = new web3.eth.Contract(
   JSON.parse(Factory.interface),
-  '0xAf4Cb4eE4d38bad0ACeF7F6E37ab9EEFcd0DBEfe'
+  '0xbCBBEA7f9896182800d7e2C03a167Dbce3aC40b2'
 );
 
 // export the instance

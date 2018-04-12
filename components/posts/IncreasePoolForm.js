@@ -38,18 +38,17 @@ class IncreasePoolForm extends Component {
   render() {
     return (
       <Form onSubmit={this.onIncreasePool} error={!!this.state.errorMessage}>
-        <Form.Field style={{ display: 'inline-block' }} >
-          <label>Amount</label>
+        <Form.Field style={{ display: 'inline-block' }}>
+          <label style={{ fontSize: "1.1em" }}>Sponsor this post!</label>
           <Input
-            label="ether"
-            labelPosition="right"
+            placeholder="ether"
             value={this.state.value}
             onChange={event => this.setState({ value: event.target.value })}
           />
         </Form.Field>
 
         <Message error header="Oops!" content={this.state.errorMessage} />
-        <Button primary loading={this.state.loading} style={{ marginLeft: '10px' }} >Increase Pool</Button>
+        <Button primary loading={this.state.loading} style={{ float: "right", marginTop: "25px" }} >Increase Pool</Button>
       </Form>
     );
   }

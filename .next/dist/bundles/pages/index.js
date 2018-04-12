@@ -519,7 +519,7 @@ module.exports = {"assembly":{".code":[{"begin":10276,"end":17383,"name":"PUSH",
 
 
 // create instance of Factory
-var instance = new __WEBPACK_IMPORTED_MODULE_0__web3__["a" /* default */].eth.Contract(JSON.parse(__WEBPACK_IMPORTED_MODULE_1__build_Factory_json___default.a.interface), '0xAf4Cb4eE4d38bad0ACeF7F6E37ab9EEFcd0DBEfe');
+var instance = new __WEBPACK_IMPORTED_MODULE_0__web3__["a" /* default */].eth.Contract(JSON.parse(__WEBPACK_IMPORTED_MODULE_1__build_Factory_json___default.a.interface), '0xbCBBEA7f9896182800d7e2C03a167Dbce3aC40b2');
 
 // export the instance
 /* harmony default export */ __webpack_exports__["a"] = (instance);

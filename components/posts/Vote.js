@@ -45,7 +45,7 @@ class Vote extends Component {
 
   render() {
     return (
-      <Grid.Column width={16}>
+      <Grid.Column width={16} style={{ padding: "0", textAlign: "right" }}>
         <Button onClick={() => this.onUpVote()} loading={this.state.loading} icon="thumbs up" positive />
         <Button onClick={() => this.onDownVote()} loading={this.state.loading} icon="thumbs down" negative />
       </Grid.Column>

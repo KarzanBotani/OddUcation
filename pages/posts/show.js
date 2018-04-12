@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Card, Grid, Table, Input } from "semantic-ui-react";
+import { Container, Card, Grid, Table, Input, Divider } from "semantic-ui-react";
 import Layout from "../../components/general/Layout";
 import IncreasePoolForm from "../../components/posts/IncreasePoolForm";
 import Vote from "../../components/posts/Vote";
@@ -200,19 +200,20 @@ class PostShow extends Component {
     return (
       <Layout>
         <Container>
-          <h3>{this.props.title}</h3>
-
           <Grid>
-            <Grid.Row>
+            <Grid.Row style={{ marginTop: "4em" }}>
               <ViewPost address={this.props.address} />
             </Grid.Row>
 
             <Grid.Row>
+              <h2>{this.props.title}</h2>
               <Vote address={this.props.address} />
             </Grid.Row>
 
+            <Divider style={{ marginLeft: "0", marginRight: "0", backgroundColor: "pink" }} />
+
             <Grid.Row>
-              <Grid.Column width={10}>
+              <Grid.Column width={10} style={{ paddingLeft: "0" }} >
                 <Card fluid>
                   <Card.Content header="Description:" />
                   <Card.Content
@@ -221,9 +222,9 @@ class PostShow extends Component {
                 </Card>
               </Grid.Column>
 
-              <Grid.Column width={6}>
-                <IncreasePoolForm address={this.props.address} />
+              <Grid.Column width={6} style={{ paddingRight: "0" }} >
                 {this.renderTables()}
+                <IncreasePoolForm address={this.props.address} />
               </Grid.Column>
             </Grid.Row>
           </Grid>
