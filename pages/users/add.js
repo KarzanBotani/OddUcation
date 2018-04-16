@@ -103,14 +103,11 @@ class AddUser extends Component {
   }
 
   render() {
+    const { Input } = Form;
+
     return (
       <Layout>
         <Container>
-
-          <Link route={`/users/${this.state.userAddress}`}>
-            <a className="item">Back</a>
-          </Link>
-
           <h3>AddUser</h3>
 
           <Grid>
@@ -150,10 +147,9 @@ class AddUser extends Component {
               <Grid.Column width={12}>
 
                 <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
-                  <Form.Field>
-                    <Input label="User Address" size="mini" value={this.state.addressToAdd}
-                      onChange={event => this.setState({ addressToAdd: event.target.value })} />
-                  </Form.Field>
+                  <Input label="User Address" value={this.state.addressToAdd}
+                    onChange={event => this.setState({ addressToAdd: event.target.value })}
+                  />
 
                   <Message error header="Oops!" content={this.state.errorMessage} />
                   <Button loading={this.state.loading} primary>Add</Button>

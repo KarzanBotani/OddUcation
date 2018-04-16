@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -524,6 +524,9 @@ var instance = new __WEBPACK_IMPORTED_MODULE_0__web3__["a" /* default */].eth.Co
 // export the instance
 /* harmony default export */ __webpack_exports__["a"] = (instance);
 
+// main contract: 0xbCBBEA7f9896182800d7e2C03a167Dbce3aC40b2
+// test contract: 0x45DE3eE363aC53a6D788aCCcABF6EB2C2AF2385a
+
 /***/ }),
 
 /***/ "./ethereum/post.js":
@@ -597,16 +600,18 @@ if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("babel-runtime/regenerator");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__("react");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__ = __webpack_require__("semantic-ui-react");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ethereum_factory__ = __webpack_require__("./ethereum/factory.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ethereum_post__ = __webpack_require__("./ethereum/post.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_general_Layout__ = __webpack_require__("./components/general/Layout.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__ = __webpack_require__("./ethereum/web3.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__routes__ = __webpack_require__("./routes.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__routes___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__routes__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__("moment");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__("react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__ = __webpack_require__("semantic-ui-react");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ethereum_factory__ = __webpack_require__("./ethereum/factory.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ethereum_post__ = __webpack_require__("./ethereum/post.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_general_Layout__ = __webpack_require__("./components/general/Layout.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ethereum_web3__ = __webpack_require__("./ethereum/web3.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__routes__ = __webpack_require__("./routes.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__routes___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__routes__);
 
 var _jsxFileName = '/home/ygeman/Projects/git/OddUcation/pages/index.js';
 
@@ -619,6 +624,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -666,7 +672,7 @@ var PostIndex = function (_Component) {
                 _context.prev = 0;
                 _context.t0 = this;
                 _context.next = 4;
-                return __WEBPACK_IMPORTED_MODULE_3__ethereum_factory__["a" /* default */].methods.postsCount().call();
+                return __WEBPACK_IMPORTED_MODULE_4__ethereum_factory__["a" /* default */].methods.postsCount().call();
 
               case 4:
                 _context.t1 = _context.sent;
@@ -693,14 +699,14 @@ var PostIndex = function (_Component) {
                 }
 
                 addr = _step.value;
-                p = Object(__WEBPACK_IMPORTED_MODULE_4__ethereum_post__["a" /* default */])(addr);
+                p = Object(__WEBPACK_IMPORTED_MODULE_5__ethereum_post__["a" /* default */])(addr);
                 _context.next = 21;
                 return p.methods.getPostSummary().call();
 
               case 21:
                 o = _context.sent;
                 _context.next = 24;
-                return __WEBPACK_IMPORTED_MODULE_3__ethereum_factory__["a" /* default */].methods.getProfile(o[0]).call();
+                return __WEBPACK_IMPORTED_MODULE_4__ethereum_factory__["a" /* default */].methods.getProfile(o[0]).call();
 
               case 24:
                 n = _context.sent;
@@ -783,11 +789,11 @@ var PostIndex = function (_Component) {
     key: 'renderPosts',
     value: function renderPosts() {
       try {
-        var Group = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"].Group,
-            Content = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"].Content,
-            Header = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"].Header,
-            Meta = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"].Meta,
-            Description = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"].Description;
+        var Group = __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Card"].Group,
+            Content = __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Card"].Content,
+            Header = __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Card"].Header,
+            Meta = __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Card"].Meta,
+            Description = __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Card"].Description;
         var _state = this.state,
             postSummaries = _state.postSummaries,
             postsCount = _state.postsCount;
@@ -795,63 +801,53 @@ var PostIndex = function (_Component) {
         var q = [];
 
         for (var i = 0; i < postsCount; i++) {
-          q[i] = __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_7__routes__["Link"],
+          q[i] = __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_8__routes__["Link"],
             { route: '/posts/' + postSummaries.postAddresses[i], __source: {
                 fileName: _jsxFileName,
-                lineNumber: 65
+                lineNumber: 66
               }
             },
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Card"],
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Card"],
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 66
-                }
-              },
-              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Image"], { src: 'https://react.semantic-ui.com/assets/images/wireframe/image.png', __source: {
-                  fileName: _jsxFileName,
                   lineNumber: 67
                 }
+              },
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Image"], { src: 'https://react.semantic-ui.com/assets/images/wireframe/image.png', __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 68
+                }
               }),
-              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
                 Content,
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 68
+                    lineNumber: 69
                   }
                 },
-                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
                   Header,
-                  {
-                    __source: {
-                      fileName: _jsxFileName,
-                      lineNumber: 69
-                    }
-                  },
-                  __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].utils.hexToUtf8(postSummaries.allSum[i][1])
-                ),
-                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                  Meta,
                   {
                     __source: {
                       fileName: _jsxFileName,
                       lineNumber: 70
                     }
                   },
-                  __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                    'span',
-                    { style: { float: 'right' }, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 71
-                      }
-                    },
-                    postSummaries.allSum[i][8],
-                    ' views'
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_7__ethereum_web3__["a" /* default */].utils.hexToUtf8(postSummaries.allSum[i][1])
+                ),
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                  Meta,
+                  {
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 71
+                    }
+                  },
+                  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
                     'span',
                     {
                       __source: {
@@ -860,38 +856,44 @@ var PostIndex = function (_Component) {
                       }
                     },
                     'by ',
-                    __WEBPACK_IMPORTED_MODULE_6__ethereum_web3__["a" /* default */].utils.hexToUtf8(postSummaries.ownerNames[i])
+                    __WEBPACK_IMPORTED_MODULE_7__ethereum_web3__["a" /* default */].utils.hexToUtf8(postSummaries.ownerNames[i])
                   )
                 ),
-                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
                   Content,
                   { extra: true, __source: {
                       fileName: _jsxFileName,
                       lineNumber: 74
                     }
                   },
-                  __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                    'span',
-                    { style: { float: 'right' }, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 75
-                      }
-                    },
-                    'up: ',
-                    postSummaries.allSum[i][10],
-                    ' / down: ',
-                    postSummaries.allSum[i][11]
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
                     'span',
                     {
                       __source: {
                         fileName: _jsxFileName,
+                        lineNumber: 75
+                      }
+                    },
+                    postSummaries.allSum[i][8],
+                    ' views'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                    'span',
+                    { style: { marginLeft: '5px', marginRight: '5px' }, __source: {
+                        fileName: _jsxFileName,
                         lineNumber: 76
                       }
                     },
-                    'uploaded: ',
-                    postSummaries.allSum[i][6]
+                    '\u2022'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+                    'span',
+                    { style: { display: 'inline-block' }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 77
+                      }
+                    },
+                    __WEBPACK_IMPORTED_MODULE_1_moment___default.a.unix(postSummaries.allSum[i][6]).fromNow()
                   )
                 )
               )
@@ -899,83 +901,83 @@ var PostIndex = function (_Component) {
           );
         }
 
-        return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Grid"],
+        return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Grid"],
           { columns: 3, __source: {
               fileName: _jsxFileName,
-              lineNumber: 85
+              lineNumber: 86
             }
           },
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Grid"].Row,
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Grid"].Row,
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 86
+                lineNumber: 87
               }
             },
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Grid"].Column,
-              { style: { display: 'flex', flexDirection: 'column', alignItems: 'center' }, __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 87
-                }
-              },
-              q[0]
-            ),
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Grid"].Column,
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Grid"].Column,
               { style: { display: 'flex', flexDirection: 'column', alignItems: 'center' }, __source: {
                   fileName: _jsxFileName,
                   lineNumber: 88
                 }
               },
-              q[1]
+              q[postsCount - 1]
             ),
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Grid"].Column,
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Grid"].Column,
               { style: { display: 'flex', flexDirection: 'column', alignItems: 'center' }, __source: {
                   fileName: _jsxFileName,
                   lineNumber: 89
                 }
               },
-              q[2]
+              q[postsCount - 2]
+            ),
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Grid"].Column,
+              { style: { display: 'flex', flexDirection: 'column', alignItems: 'center' }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 90
+                }
+              },
+              q[postsCount - 3]
             )
           ),
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Grid"].Row,
+          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Grid"].Row,
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 92
+                lineNumber: 93
               }
             },
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Grid"].Column,
-              { style: { display: 'flex', flexDirection: 'column', alignItems: 'center' }, __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 93
-                }
-              },
-              q[3]
-            ),
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Grid"].Column,
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Grid"].Column,
               { style: { display: 'flex', flexDirection: 'column', alignItems: 'center' }, __source: {
                   fileName: _jsxFileName,
                   lineNumber: 94
                 }
               },
-              q[4]
+              q[postsCount - 4]
             ),
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Grid"].Column,
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Grid"].Column,
               { style: { display: 'flex', flexDirection: 'column', alignItems: 'center' }, __source: {
                   fileName: _jsxFileName,
                   lineNumber: 95
                 }
               },
-              q[5]
+              q[postsCount - 5]
+            ),
+            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Grid"].Column,
+              { style: { display: 'flex', flexDirection: 'column', alignItems: 'center' }, __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 96
+                }
+              },
+              q[postsCount - 6]
             )
           )
         );
@@ -986,29 +988,28 @@ var PostIndex = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var Row = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Grid"].Row,
-          Column = __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Grid"].Column;
+      var Row = __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Grid"].Row,
+          Column = __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Grid"].Column;
 
 
-      return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_5__components_general_Layout__["a" /* default */],
+      return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_6__components_general_Layout__["a" /* default */],
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 108
-          }
-        },
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Advertisement"], { style: { width: '100%', backgroundColor: 'red' }, unit: 'large leaderboard', test: 'Splash text', __source: {
-            fileName: _jsxFileName,
             lineNumber: 109
           }
+        },
+        __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Advertisement"], { style: { width: '100%', backgroundColor: 'red' }, unit: 'large leaderboard', test: 'Splash text', __source: {
+            fileName: _jsxFileName,
+            lineNumber: 110
+          }
         }),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_2_semantic_ui_react__["Container"],
-          {
-            __source: {
+        __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_3_semantic_ui_react__["Container"],
+          { style: { marginBottom: '8em' }, __source: {
               fileName: _jsxFileName,
-              lineNumber: 110
+              lineNumber: 111
             }
           },
           this.renderPosts()
@@ -1031,12 +1032,12 @@ var PostIndex = function (_Component) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return __WEBPACK_IMPORTED_MODULE_3__ethereum_factory__["a" /* default */].methods.getDeployedPosts().call();
+                return __WEBPACK_IMPORTED_MODULE_4__ethereum_factory__["a" /* default */].methods.getDeployedPosts().call();
 
               case 2:
                 posts = _context2.sent;
                 _context2.next = 5;
-                return __WEBPACK_IMPORTED_MODULE_3__ethereum_factory__["a" /* default */].methods.getUsers().call();
+                return __WEBPACK_IMPORTED_MODULE_4__ethereum_factory__["a" /* default */].methods.getUsers().call();
 
               case 5:
                 usrsAddrs = _context2.sent;
@@ -1059,7 +1060,7 @@ var PostIndex = function (_Component) {
   }]);
 
   return PostIndex;
-}(__WEBPACK_IMPORTED_MODULE_1_react__["Component"]);
+}(__WEBPACK_IMPORTED_MODULE_2_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (PostIndex);
 
@@ -1079,7 +1080,7 @@ module.exports = routes;
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./pages/index.js");
@@ -1091,6 +1092,13 @@ module.exports = __webpack_require__("./pages/index.js");
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/regenerator");
+
+/***/ }),
+
+/***/ "moment":
+/***/ (function(module, exports) {
+
+module.exports = require("moment");
 
 /***/ }),
 

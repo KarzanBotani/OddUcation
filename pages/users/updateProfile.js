@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Button, Card, Divider, Grid, Table, Icon, Image, Message, Form, Input } from "semantic-ui-react";
+import { Container, Button, Card, Divider, Grid, Table, Icon, Image, Message, Form, Input, Dropdown } from "semantic-ui-react";
 import Layout from "../../components/general/Layout";
 import factory from "../../ethereum/factory"; // import factory instance
 import Post from "../../ethereum/post"; // not construct (capital P)
@@ -29,12 +29,20 @@ class UpdateProfile extends Component {
     newSocialMedia2: '',
     newSocialMedia2Index: 1,
     newSocialMedia3: '',
-    newSocialMedia3Index: 2
+    newSocialMedia3Index: 2,
+    pickedOption: 10
   };
+
+  static async getInitialProps(props) {
+    const usrAdr = props.query.address;
+
+    return { usrAdr };
+  }
 
   async componentDidMount() {
     try {
       const accounts = await web3.eth.getAccounts();
+      this.setState({ userAddress: accounts[0] });
       const balance = await web3.eth.getBalance(accounts[0]);
       const profileSummary = await factory.methods
         .getProfile(accounts[0])
@@ -50,7 +58,7 @@ class UpdateProfile extends Component {
         this.setState({ organizationMembersCount: profileSummary[4].length });
       }
 
-      this.setState({ userAddress: accounts[0] });
+      
       this.setState({ balance: balance });
       this.setState({ name: web3.utils.hexToUtf8(profileSummary[1]) });
       this.setState({
@@ -160,7 +168,7 @@ class UpdateProfile extends Component {
       const accounts = await web3.eth.getAccounts();
       await factory.methods.setRole(this.state.newRole).send({ from: accounts[0] });
       
-      Router.replaceRoute(`/users/${accounts[0]}/update-profile`);
+      Router.pushRoute(`/users/${accounts[0]}/update-profile`);
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
@@ -237,23 +245,25 @@ class UpdateProfile extends Component {
   };
 
   renderUpdateRole() {
+    const { Group, Radio } = Form;
+
     return (
-      <div style={{ margin: "15px" }}>
+      <div>
         <Form onSubmit={this.onUpdateRole} error={!!this.state.errorMessage}>
-          <Form.Group style={{ margin: "8px 0 0 0", float: 'left' }} >
-            <Form.Radio
+          <Group style={{ margin: "8px 0 0 0", float: 'left' }}>
+            <Radio
               label="Regular"
               name="newRole"
               checked={this.state.newRole === 1}
               onChange={event => this.setState({ newRole: 1 })}
             />
-            <Form.Radio
+            <Radio
               label="Organization"
               name="newRole"
               checked={this.state.newRole === 2}
               onChange={event => this.setState({ newRole: 2 })}
             />
-          </Form.Group>
+          </Group>
 
           <Message error header="Oops!" content={this.state.errorMessage} />
           <Button loading={this.state.loading} primary>Update Role</Button>
@@ -263,94 +273,104 @@ class UpdateProfile extends Component {
   }
 
   renderUpdateName() {
+    const { Input } = Form;
+
     return (
-      <div style={{ margin: "15px" }}>
+      <div>
         <Form onSubmit={this.onUpdateName} error={!!this.state.errorMessage}>
-          <Form.Field style={{ margin: '3px 0 0 0', float: 'left', width: '300px' }}>
-            <Input
-              label="New Name"
-              size="mini"
-              value={this.state.newName}
-              onChange={event =>
-                this.setState({ newName: event.target.value })
-              }
-            />
-          </Form.Field>
+          <Input label="New Name" value={this.state.newName}
+            onChange={event => this.setState({ newName: event.target.value }) }
+          />
 
           <Message error header="Oops!" content={this.state.errorMessage} />
-          <Button loading={this.state.loading} primary style={{ marginLeft: '15px' }}>Update Name</Button>
+          <Button loading={this.state.loading} primary>Update Name</Button>
         </Form>
       </div>
     );
   }  
 
   renderUpdateSocialMedia1() {
+    const { Input } = Form;
+
     return (
-      <div style={{ margin: "15px" }}>
+      <div>
         <Form onSubmit={this.onUpdateSocialMedia1} error={!!this.state.errorMessage}>
-          <Form.Field style={{ margin: '3px 0 0 0', float: 'left', width: '300px' }}>
-            <Input
-              label="New SocialMedia1"
-              size="mini"
-              value={this.state.newSocialMedia1}
-              onChange={event =>
-                this.setState({ newSocialMedia1: event.target.value })
-              }
-            />
-          </Form.Field>
+          <Input
+            label="New SocialMedia1" value={this.state.newSocialMedia1}
+            onChange={event => this.setState({ newSocialMedia1: event.target.value }) }
+          />
 
           <Message error header="Oops!" content={this.state.errorMessage} />
-          <Button loading={this.state.loading} primary style={{ marginLeft: '15px' }}>Update SocialMedia1</Button>
+          <Button loading={this.state.loading} primary>Update SocialMedia1</Button>
         </Form>
       </div>
     );
   }
 
   renderUpdateSocialMedia2() {
+    const { Input } = Form;
+
     return (
-      <div style={{ margin: "15px" }}>
+      <div>
         <Form onSubmit={this.onUpdateSocialMedia2} error={!!this.state.errorMessage}>
-          <Form.Field style={{ margin: '3px 0 0 0', float: 'left', width: '300px' }}>
-            <Input
-              label="New SocialMedia2"
-              size="mini"
-              value={this.state.newSocialMedia2}
-              onChange={event =>
-                this.setState({ newSocialMedia2: event.target.value })
-              }
-            />
-          </Form.Field>
+          <Input
+            label="New SocialMedia2" value={this.state.newSocialMedia2}
+            onChange={event => this.setState({ newSocialMedia2: event.target.value }) }
+          />
 
           <Message error header="Oops!" content={this.state.errorMessage} />
-          <Button loading={this.state.loading} primary style={{ marginLeft: '15px' }}>Update SocialMedia2</Button>
+          <Button loading={this.state.loading} primary>Update SocialMedia2</Button>
         </Form>
       </div>
     );
   }
 
   renderUpdateSocialMedia3() {
+    const { Input } = Form;
+
     return (
-      <div style={{ margin: "15px" }}>
+      <div>
         <Form onSubmit={this.onUpdateSocialMedia3} error={!!this.state.errorMessage}>
-          <Form.Field style={{ margin: '3px 0 0 0', float: 'left', width: '300px' }}>
-            <Input
-              label="New SocialMedia3"
-              size="mini"
-              value={this.state.newSocialMedia3}
-              onChange={event =>
-                this.setState({ newSocialMedia3: event.target.value })
-              }
-            />
-          </Form.Field>
+          <Input
+            label="New SocialMedia3" value={this.state.newSocialMedia3}
+            onChange={event => this.setState({ newSocialMedia3: event.target.value }) }
+          />
 
           <Message error header="Oops!" content={this.state.errorMessage} />
-          <Button loading={this.state.loading} primary style={{ marginLeft: '15px' }}>Update SocialMedia3</Button>
+          <Button loading={this.state.loading} primary>Update SocialMedia3</Button>
         </Form>
       </div>
     );
   }
 
+  renderUpdateOptions() {
+    const { pickedOption } = this.state;
+    let a;
+    
+    if (pickedOption === 0) {
+      return this.renderUpdateRole();
+    } else if (pickedOption === 1) {
+      return this.renderUpdateName();
+    } else if (pickedOption === 2) {
+      return this.renderUpdateSocialMedia1();
+    } else if (pickedOption === 3) {
+      return this.renderUpdateSocialMedia2();
+    } else if (pickedOption === 4) {
+      return this.renderUpdateSocialMedia3();
+    }
+  }
+
   render() {
+    const { Input, TextArea, Group, Field, Dropdown } = Form;
+
+    const updateOptions = [
+      { value: 0, text: 'Role' },
+      { value: 1, text: 'Name' },
+      { value: 2, text: 'Social Media 1' },
+      { value: 3, text: 'Social Media 2' },
+      { value: 4, text: 'Social Media 3' },
+    ];
+
     return (
       <Layout>
         <Container>
@@ -420,15 +440,12 @@ class UpdateProfile extends Component {
               </Grid.Column>
 
               <Grid.Column width={12}>
-                {this.renderUpdateRole()}
-                <Divider horizontal></Divider>
-                {this.renderUpdateName()}
-                <Divider horizontal />
-                {this.renderUpdateSocialMedia1()}
-                <Divider horizontal />
-                {this.renderUpdateSocialMedia2()}
-                <Divider horizontal />
-                {this.renderUpdateSocialMedia3()}
+                <label>What would you like to update?</label>
+                <Dropdown selection options={updateOptions} onChange={ (event, { value }) => this.setState({ pickedOption: value }) } />
+
+                <Divider style={{ marginLeft: "0", marginRight: "0", backgroundColor: "pink" }} />
+
+                {this.renderUpdateOptions()}
               </Grid.Column>
             </Grid.Row>
           </Grid>

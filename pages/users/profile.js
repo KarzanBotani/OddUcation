@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { Component } from "react";
 import { Container, Button, Card, Divider, Grid, Table, Icon, Image, Message } from 'semantic-ui-react';
 import Layout from "../../components/general/Layout";
@@ -18,9 +19,9 @@ class UserProfile extends Component {
   static async getInitialProps(props) {
     try {
       const userAddress = props.query.address;
-      const profileSummary = await factory.methods.getProfile(props.query.address).call();
-      const userPostsCount = await factory.methods.userPostsCount(props.query.address).call();
-      const balance = await web3.eth.getBalance(props.query.address);
+      const profileSummary = await factory.methods.getProfile(userAddress).call();
+      const userPostsCount = await factory.methods.userPostsCount(userAddress).call();
+      const balance = await web3.eth.getBalance(userAddress);
 
       const name = web3.utils.hexToUtf8(profileSummary[1]);
       const socialMedia1 = web3.utils.hexToUtf8(profileSummary[2][0]);
@@ -129,12 +130,12 @@ class UserProfile extends Component {
               <Content>
                 <Header>{web3.utils.hexToUtf8(postSummaries.allSum[i][1])}</Header>
                 <Meta>
-                  <span style={{ float: 'right' }}>{postSummaries.allSum[i][8]} views</span>
                   <span>by {this.props.name}</span>
                 </Meta>
                 <Content extra>
-                  <span style={{ float: 'right' }}>up: {postSummaries.allSum[i][10]} / down: {postSummaries.allSum[i][11]}</span>
-                  <span>uploaded: {postSummaries.allSum[i][6]}</span>
+                  <span>{postSummaries.allSum[i][8]} views</span>
+                  <span style={{ marginLeft: '5px', marginRight: '5px' }}>•</span>
+                  <span style={{ display: 'inline-block' }}>{moment.unix(postSummaries.allSum[i][6]).fromNow()}</span>
                 </Content>
               </Content>
             </Card>
@@ -167,7 +168,7 @@ class UserProfile extends Component {
   render() {
     return (
       <Layout>
-        <Container>
+        <Container style={{ marginBottom: '8em' }}>
           <h3>UserProfile</h3>
 
           <Grid>

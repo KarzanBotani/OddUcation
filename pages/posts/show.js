@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { Component } from "react";
 import { Container, Card, Grid, Table, Input, Divider } from "semantic-ui-react";
 import Layout from "../../components/general/Layout";
@@ -21,6 +22,8 @@ class PostShow extends Component {
     const enumSummary = await post.methods.getPostSummaryEnums().call();
     const n = await factory.methods.getProfile(summary[0]).call();
 
+    let convertedDate = await moment.unix(summary[6]).format('LL');
+
     return {
       address: props.query.address,
       owner: summary[0],
@@ -30,7 +33,7 @@ class PostShow extends Component {
       contentHash: summary[3],
       language: web3.utils.hexToUtf8(summary[4]),
       postBalance: summary[5],
-      date: summary[6],
+      date: convertedDate,
       length: summary[7],
       views: summary[8],
       viewFee: summary[9],
@@ -46,7 +49,6 @@ class PostShow extends Component {
   }
 
   renderTables() {
-
     const { Body, Cell, Row } = Table;
 
     const {
@@ -183,7 +185,7 @@ class PostShow extends Component {
             <Cell textAlign="right">
               {(() => {
                 switch (paymentOption) {
-                  case "0": return "Regular";
+                  case "0": return "Personal";
                   case "1": return "Organization";
                 }
               })()}
@@ -206,7 +208,9 @@ class PostShow extends Component {
             </Grid.Row>
 
             <Grid.Row>
-              <h2>{this.props.title}</h2>
+              <Grid.Column width={13}>
+                <h2>{this.props.title}</h2>
+              </Grid.Column>
               <Vote address={this.props.address} />
             </Grid.Row>
 

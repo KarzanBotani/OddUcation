@@ -1,0 +1,22 @@
+.menuStyle {
+  border: 'none';
+  border-radius: 0;
+  box-shadow: 'none';
+  margin-bottom: '1em';
+  margin-top: '4em';
+  transition: 'box-shadow 0.5s ease, padding 0.5s ease';
+};
+
+containerStyle {
+  border-top: '1px solid black';
+  border-bottom: '1px solid black';
+  font-size: '1rem';
+};
+
+dropdownItemStyle {
+  padding: '0px !important';
+};
+
+dropdownLinkStyle {
+  padding: '24px 32px 24px 31px';
+};

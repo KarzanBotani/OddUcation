@@ -33,7 +33,7 @@ var shallowEqual = __webpack_require__("./node_modules/fbjs/lib/shallowEqual.js"
 var containsNode = __webpack_require__("./node_modules/fbjs/lib/containsNode.js");
 var focusNode = __webpack_require__("./node_modules/fbjs/lib/focusNode.js");
 var emptyObject = __webpack_require__("./node_modules/fbjs/lib/emptyObject.js");
-var checkPropTypes = __webpack_require__("./node_modules/prop-types/checkPropTypes.js");
+var checkPropTypes = __webpack_require__("./node_modules/next/node_modules/prop-types/checkPropTypes.js");
 var hyphenateStyleName = __webpack_require__("./node_modules/fbjs/lib/hyphenateStyleName.js");
 var camelizeStyleName = __webpack_require__("./node_modules/fbjs/lib/camelizeStyleName.js");
 
@@ -15428,7 +15428,7 @@ var emptyObject = __webpack_require__("./node_modules/fbjs/lib/emptyObject.js");
 var invariant = __webpack_require__("./node_modules/fbjs/lib/invariant.js");
 var warning = __webpack_require__("./node_modules/fbjs/lib/warning.js");
 var emptyFunction = __webpack_require__("./node_modules/fbjs/lib/emptyFunction.js");
-var checkPropTypes = __webpack_require__("./node_modules/prop-types/checkPropTypes.js");
+var checkPropTypes = __webpack_require__("./node_modules/next/node_modules/prop-types/checkPropTypes.js");
 
 // TODO: this is special because it gets imported during build.
 

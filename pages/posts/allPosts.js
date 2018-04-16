@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { Component } from 'react';
 import { Container, Button, Card, Divider, Grid, Table, Icon, Image, Message } from 'semantic-ui-react';
 import factory from '../../ethereum/factory'; // import factory instance
@@ -45,7 +46,6 @@ class AllPosts extends Component {
       await this.setState({ 
         postSummaries: { postAddresses, allSum, ownerNames }
       });
-
     } catch (err) {
       console.log(err);
     }
@@ -65,12 +65,12 @@ class AllPosts extends Component {
               <Content>
                 <Header>{web3.utils.hexToUtf8(postSummaries.allSum[i][1])}</Header>
                 <Meta>
-                  <span style={{ float: 'right' }}>{postSummaries.allSum[i][8]} views</span>
                   <span>by {web3.utils.hexToUtf8(postSummaries.ownerNames[i])}</span>
                 </Meta>
                 <Content extra>
-                  <span style={{ float: 'right' }}>up: {postSummaries.allSum[i][10]} / down: {postSummaries.allSum[i][11]}</span>
-                  <span>uploaded: {postSummaries.allSum[i][6]}</span>
+                  <span>{postSummaries.allSum[i][8]} views</span>
+                  <span style={{ marginLeft: '5px', marginRight: '5px' }}>•</span>
+                  <span style={{ display: 'inline-block' }}>{moment.unix(postSummaries.allSum[i][6]).fromNow()}</span>
                 </Content>
               </Content>
             </Card>
@@ -89,7 +89,7 @@ class AllPosts extends Component {
 
     return (
       <Layout>
-        <Container>
+        <Container style={{ marginBottom: '8em' }}>
           <h1>allPosts</h1>
           {this.renderPosts()}
         </Container>

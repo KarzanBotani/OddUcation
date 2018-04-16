@@ -163,13 +163,7 @@ class ShowMembers extends Component {
 
     return (
       <Layout>
-
         <Container>
-
-          <Link route={`/users/${this.state.userAddress}`}>
-            <a className="item">Back</a>
-          </Link>
-
           <h3>ShowUsers</h3>
 
           <Grid>

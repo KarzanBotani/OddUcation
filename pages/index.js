@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { Component } from 'react';
 import { Advertisement, Container, Button, Card, Divider, Grid, Table, Icon, Image, Message } from 'semantic-ui-react';
 import factory from '../ethereum/factory'; // import factory instance
@@ -68,12 +69,12 @@ class PostIndex extends Component {
               <Content>
                 <Header>{web3.utils.hexToUtf8(postSummaries.allSum[i][1])}</Header>
                 <Meta>
-                  <span style={{ float: 'right' }}>{postSummaries.allSum[i][8]} views</span>
                   <span>by {web3.utils.hexToUtf8(postSummaries.ownerNames[i])}</span>
                 </Meta>
                 <Content extra>
-                  <span style={{ float: 'right' }}>up: {postSummaries.allSum[i][10]} / down: {postSummaries.allSum[i][11]}</span>
-                  <span>uploaded: {postSummaries.allSum[i][6]}</span>
+                  <span>{postSummaries.allSum[i][8]} views</span>
+                  <span style={{ marginLeft: '5px', marginRight: '5px' }}>•</span>
+                  <span style={{ display: 'inline-block' }}>{moment.unix(postSummaries.allSum[i][6]).fromNow()}</span>
                 </Content>
               </Content>
             </Card>
@@ -84,15 +85,15 @@ class PostIndex extends Component {
       return (
         <Grid columns={3}>
           <Grid.Row>
-            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[0]}</Grid.Column>
-            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[1]}</Grid.Column>
-            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[2]}</Grid.Column>
+            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[postsCount-1]}</Grid.Column>
+            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[postsCount-2]}</Grid.Column>
+            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[postsCount-3]}</Grid.Column>
           </Grid.Row>
 
           <Grid.Row>
-            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[3]}</Grid.Column>
-            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[4]}</Grid.Column>
-            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[5]}</Grid.Column>
+            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[postsCount-4]}</Grid.Column>
+            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[postsCount-5]}</Grid.Column>
+            <Grid.Column style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>{q[postsCount-6]}</Grid.Column>
           </Grid.Row>
         </Grid>
       );
@@ -107,7 +108,7 @@ class PostIndex extends Component {
     return (
       <Layout>
         <Advertisement style={{ width: '100%', backgroundColor: 'red' }} unit='large leaderboard' test='Splash text' />
-        <Container>
+        <Container style={{ marginBottom: '8em' }}>
           {this.renderPosts()}
         </Container>
       </Layout>
